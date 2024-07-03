@@ -11,7 +11,7 @@ class RiwayatController extends Controller
     public function index()
     {
         $url = URL::current();
-        return view('user_app/riwayat', with([
+        return view('user_app.riwayat', with([
             'route' => $url
         ]));
     }
