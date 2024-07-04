@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\user\AbsenController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProfileController;
 use App\Http\Controllers\user\RiwayatController;
@@ -28,3 +29,6 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('home', [HomeController::class, 'index'])->name('home');
 Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat');
 Route::get('profil', [ProfileController::class, 'index'])->name('profile');
+Route::get('absen/{jenis}', [AbsenController::class, 'checkInOutIndex'])->name('checkInOut');
+Route::post('absen/{jenis}', [AbsenController::class, 'store'])->name('storeAbsen');
+Route::get('absen/{jenis}/sukses', [AbsenController::class, 'absenSukses'])->name('absenSuccess');
