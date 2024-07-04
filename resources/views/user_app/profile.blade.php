@@ -20,6 +20,9 @@
             No. HP
         </div>
         <div class="text-lg">0812345678</div>
+        <div class="mt-4">
+            <a href="/login" class="bg-red-500 py-1 px-4 text-white">Logout</a>
+        </div>
     </div>
 
     @extends('user_app/bottom_bar')
