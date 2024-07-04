@@ -2,7 +2,7 @@
     class="flex fixed bottom-0 border bg-sky-50 w-full h-16 justify-around 
             items-center text-sm text-slate-500 shadow-lg">
     <a href="home">
-        <div class="{{ $route == 'http://absensi.test:8080/home' ? 'text-blue-600' : '' }}">
+        <div class="{{ $route == 'https://absensi.test/home' ? 'text-blue-600' : '' }}">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 mx-auto">
                     <path
@@ -15,7 +15,7 @@
         </div>
     </a>
     <a href="riwayat">
-        <div class="{{ $route == 'http://absensi.test:8080/riwayat' ? 'text-blue-600' : '' }}">
+        <div class="{{ $route == 'https://absensi.test/riwayat' ? 'text-blue-600' : '' }}">
             <div>
                 <svg fill="currentColor" height="24px" width="24px" version="1.1" id="Capa_1"
                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -34,7 +34,7 @@
         </div>
     </a>
     <a href="profil">
-        <div class="{{ $route == 'http://absensi.test:8080/profil' ? 'text-blue-600' : '' }}">
+        <div class="{{ $route == 'https://absensi.test/profil' ? 'text-blue-600' : '' }}">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 mx-auto">
                     <path fill-rule="evenodd"
