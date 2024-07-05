@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Hash;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -13,6 +15,19 @@ class AuthController extends Controller
 
     public function doLogin(Request $request)
     {
-        return redirect()->route('home');
+        $email = $request->email;
+        $password = $request->password;
+
+        $credential = [
+            'email' => $email,
+            'password' => $password
+        ];
+
+        if (Auth::attempt($credential)) {
+            return redirect()->route('home');
+        } else {
+            // Todo nanti tambah flash session
+            return redirect()->route('login');
+        }
     }
 }
