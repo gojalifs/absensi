@@ -13,7 +13,8 @@
                 <div class="text-sm" id="time"></div>
             </div>
             <div>
-                <img src="{{ $user->path }}" alt="avatar" class="rounded-full w-16 h-16">
+                <img src="{{ $user->profile_photo_path ?? 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg' }}"
+                    alt="avatar" class="rounded-full w-16 h-16">
             </div>
         </div>
 
@@ -44,28 +45,47 @@
 
         {{-- Menu Utama --}}
         <div class="px-4 mt-4">Menu Utama</div>
-        <div class="grid grid-cols-2 text-sm py-4 px-8">
-            <div>
+        <div class="grid grid-cols-2 text-sm py-6 px-8">
+            <div class="group">
                 <a href="absen/masuk">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 w-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 mx-auto">
                         <path fill-rule="evenodd"
                             d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6Zm-5.03 4.72a.75.75 0 0 0 0 1.06l1.72 1.72H2.25a.75.75 0 0 0 0 1.5h10.94l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 0 0-1.06 0Z"
                             clip-rule="evenodd" />
                     </svg>
-                    <div class="font-normal text-center">
-                        Check in
+                    <div class="flex justify-center">
+                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400">
+                            Check in
+                        </div>
                     </div>
                 </a>
             </div>
-            <div>
+            <div class="group">
                 <a href="absen/keluar">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 w-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 mx-auto">
                         <path fill-rule="evenodd"
                             d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z"
                             clip-rule="evenodd" />
                     </svg>
-                    <div class="font-normal text-center">
-                        Check out
+                    <div class="flex justify-center">
+                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400">
+                            Check out
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="mt-4 group">
+                <a href="absen/izin">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-12 mx-auto">
+                        <path
+                            d="M8 13H16M8 13V18C8 19.8856 8 20.8284 8.58579 21.4142C9.17157 22 10.1144 22 12 22C13.8856 22 14.8284 22 15.4142 21.4142C16 20.8284 16 19.8856 16 18V13M8 13C5.2421 12.3871 3.06717 10.2687 2.38197 7.52787L2 6M16 13C17.7107 13 19.1506 14.2804 19.3505 15.9795L20 21.5"
+                            stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
+                        <circle cx="12" cy="6" r="4" stroke="#1C274C" stroke-width="1.5" />
+                    </svg>
+                    <div class="flex justify-center">
+                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400">
+                            Izin
+                        </div>
                     </div>
                 </a>
             </div>

@@ -12,6 +12,11 @@ class AbsenController extends Controller
         $user = new \stdClass();
         $user->name = 'Fajar';
         $user->fullName = 'Fajar Sidik Prasetio';
+
+        if ($jenis == 'izin') {
+            return view('user_app.absen.izin');
+        }
+
         return view(
             'user_app.absen.checkin_out',
             with(
