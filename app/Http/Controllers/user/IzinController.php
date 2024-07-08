@@ -4,11 +4,19 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Izin;
+use App\Models\User;
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IzinController extends Controller
 {
+    public function __construct()
+    {
+
+        // Set locale to Indonesian
+        Carbon::setLocale('id');
+    }
     public function store(Request $request)
     {
         try {
@@ -42,8 +50,22 @@ class IzinController extends Controller
         }
     }
 
-    public function successIndex()
+    public function successIndex(Request $request)
     {
-        return view('user_app/izin/sukses');
+        $izindata = Izin::find(25);
+
+        // Format tanggal
+        $carbon = Carbon::parse($izindata->tanggal);
+        $formattedDate = $carbon->translatedFormat('d F Y');
+
+        $izindata->tanggal = $formattedDate;
+        $user = $izindata->user;
+
+        $data = [
+            'user' => $user,
+            'izin' => $izindata
+        ];
+
+        return view('user_app/izin/sukses', with($data));
     }
 }
