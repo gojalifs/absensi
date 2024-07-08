@@ -16,6 +16,8 @@ return new class extends Migration {
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('jenis', ['MASUK', 'PULANG']);
             $table->string('photo_path');
+            $table->decimal('lat');
+            $table->decimal('lng');
             $table->unsignedTinyInteger('izin')->default(0);
             $table->unsignedBigInteger('izin_id');
             $table->foreign('izin_id')->references('id')->on('izin')->cascadeOnUpdate()->cascadeOnDelete();

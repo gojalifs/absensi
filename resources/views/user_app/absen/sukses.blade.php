@@ -11,11 +11,10 @@
         <div class="mt-4 mx-4">
             <div>
                 {{-- Todo nanti diganti dengan gambar selfie --}}
-                <img src="https://htmlstream.com/preview/unify-v2.6/assets/img-temp/400x450/img5.jpg" alt=""
-                    class="w-64 h-64 mx-auto rounded-lg">
+                <img src="{{ $data->photo_path }}" alt="" class="w-64 h-64 mx-auto rounded-lg">
             </div>
             <div class="mt-4 text-xl text-center">
-                Selamat, Fajar Sidik Prasetio!
+                Selamat, <span class="font-medium"> Fajar Sidik Prasetio! </span>
             </div>
             <div class="mt-4">
                 Anda berhasil absen <span class="font-bold uppercase">masuk</span>. Semangat!!
@@ -30,19 +29,19 @@
                 <div class="grow space-y-2 mt-2 lg:mt-0">
                     <div class="flex">
                         <div class="w-1/2">Jenis</div>
-                        <div>: Absen masuk</div>
+                        <div>: Absen {{ $data->jenis }}</div>
                     </div>
                     <div class="flex">
                         <div class="w-1/2">Jam</div>
-                        <div>: 06.30</div>
+                        <div>: {{ $data->jam }} </div>
                     </div>
                     <div class="flex">
                         <div class="w-1/2">Latitude</div>
-                        <div>: -6.634343</div>
+                        <div>: {{ $data->lat }} </div>
                     </div>
                     <div class="flex">
                         <div class="w-1/2">Longitude</div>
-                        <div>: 107.2324354</div>
+                        <div>: {{ $data->lng }} </div>
                     </div>
                 </div>
             </div>
@@ -53,8 +52,8 @@
     </div>
 
     <script>
-        var latitude = -6.2453078;
-        var longitude = 107.1812406;
+        var latitude = '{{ $data->lat }}';
+        var longitude = '{{ $data->lng }}';
         var map = L.map('map').setView([latitude, longitude], 14);
         var marker = new L.marker([latitude, longitude]).addTo(map);
 

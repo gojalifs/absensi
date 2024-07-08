@@ -58,7 +58,7 @@
                 <canvas id="canvas" width="256" height="256"
                     class="hidden w-64 h-auto max-w-96 max-h-96 mx-auto rounded-lg"></canvas>
                 <button id="request-button" class="hidden">Request Camera</button>
-                <button id="capture-button" class="w-full mt-4">
+                <button id="capture-button" class="w-full mt-4 flex">
                     <div class="w-12 h-12 rounded-full bg-white border-2 border-slate-800 content-center mx-auto">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                             class="size-6 mx-auto" id="take">
@@ -71,6 +71,15 @@
                             class="size-6 hidden mx-auto" id="retake">
                             <path fill-rule="evenodd"
                                 d="M9.53 2.47a.75.75 0 0 1 0 1.06L4.81 8.25H15a6.75 6.75 0 0 1 0 13.5h-3a.75.75 0 0 1 0-1.5h3a5.25 5.25 0 1 0 0-10.5H4.81l4.72 4.72a.75.75 0 1 1-1.06 1.06l-6-6a.75.75 0 0 1 0-1.06l6-6a.75.75 0 0 1 1.06 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="hidden w-12 h-12 rounded-full bg-white border-2 border-slate-800 content-center mx-auto"
+                        id="done">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                            class="size-6 mx-auto">
+                            <path fill-rule="evenodd"
+                                d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z"
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
@@ -171,6 +180,7 @@
         const canvas = document.getElementById("canvas");
         const takeBtn = document.getElementById("take");
         const retakeBtn = document.getElementById("retake");
+        const doneBtn = document.getElementById("done");
         const absenBtn = document.getElementById("absen-button");
         const cameraIcon = document.getElementById('camera-icon');
         const image = document.getElementById('image');
@@ -184,6 +194,7 @@
                 takeBtn.classList.remove('hidden');
                 canvas.classList.add('hidden');
                 retakeBtn.classList.add('hidden');
+                doneBtn.classList.add('hidden');
                 stream = navigator.mediaDevices.getUserMedia({
                     video: true
                 }).then((result) => {
@@ -200,6 +211,7 @@
                 takeBtn.classList.remove('hidden');
                 canvas.classList.add('hidden');
                 retakeBtn.classList.add('hidden');
+                doneBtn.classList.add('hidden');
             }
         }
 
@@ -245,6 +257,7 @@
                     takeBtn.classList.add('hidden');
                     canvas.classList.remove('hidden');
                     retakeBtn.classList.remove('hidden');
+                    doneBtn.classList.remove('hidden');
                     cameraIcon.classList.add('hidden');
                     image.classList.remove('hidden');
                     image.src = imageData;
@@ -262,6 +275,7 @@
                 takeBtn.classList.remove('hidden');
                 canvas.classList.add('hidden');
                 retakeBtn.classList.add('hidden');
+                doneBtn.classList.add('hidden');
 
                 stream = navigator.mediaDevices.getUserMedia({
                     video: true
@@ -276,9 +290,11 @@
             }
         })
 
+        doneBtn.addEventListener("click", toggleModal)
+
         function checkStatus() {
             // TODO Perlu diperbaiki, harus hapus !
-            if (imageData && !insideRadius) {
+            if (imageData && insideRadius) {
                 return true;
             } else {
                 return false;
@@ -305,8 +321,8 @@
 
                 const data = {
                     imageData: imageData,
-                    latitude: latitude,
-                    longitude: longitude,
+                    lat: latitude,
+                    lng: longitude,
                     jenis: '{{ $jenis }}'
                 };
 

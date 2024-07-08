@@ -13,6 +13,8 @@ class Absensi extends Model
         'user_id',
         'jenis',
         'photo_path',
+        'latitude',
+        'longitude',
         'izin',
         'created_at',
         'updated_at'
