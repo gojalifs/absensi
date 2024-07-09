@@ -35,7 +35,7 @@ class AbsenController extends Controller
 
     public function store(Request $request)
     {
-        try {
+        // try {
             $user = Auth::user()->id;
 
             // Ambil data gambar
@@ -69,9 +69,9 @@ class AbsenController extends Controller
                 'success' => true,
                 'redirect' => route('absenSuccess', $request->jenis),
             ]);
-        } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(['error' => 'Gagal mengajukan izin']);
-        }
+        // } catch (\Throwable $th) {
+        //     return redirect()->back()->withErrors(['error' => 'Gagal mengajukan izin']);
+        // }
     }
 
     public function absenSukses()

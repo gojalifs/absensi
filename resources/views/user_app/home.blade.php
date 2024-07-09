@@ -25,17 +25,17 @@
                 <div>Pulang</div>
             </div>
 
-            <div class="flex grow justify-around items-center text-4xl font-medium">
-                <div>
-                    @if ('a' == 'sudah')
-                        <div>07.59</div>
+            <div class="flex grow justify-around items-center text-4xl font-medium text-center">
+                <div class="w-1/2">
+                    @if ($masuk)
+                        <div>{{ $masuk }}</div>
                     @else
                         <div>-</div>
                     @endif
                 </div>
-                <div>
-                    @if ('absen' == 'sudah')
-                        <div>17.03</div>
+                <div class="w-1/2">
+                    @if ($pulang)
+                        <div>{{ $pulang }}</div>
                     @else
                         <div>-</div>
                     @endif
@@ -47,28 +47,30 @@
         <div class="px-4 mt-4">Menu Utama</div>
         <div class="grid grid-cols-2 text-sm py-6 px-8">
             <div class="group">
-                <a href="absen/masuk">
+                <a href="absen/masuk" id="checkin">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 mx-auto">
                         <path fill-rule="evenodd"
                             d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6Zm-5.03 4.72a.75.75 0 0 0 0 1.06l1.72 1.72H2.25a.75.75 0 0 0 0 1.5h10.94l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 0 0-1.06 0Z"
                             clip-rule="evenodd" />
                     </svg>
                     <div class="flex justify-center">
-                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400">
+                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400"
+                            id="checkin_text">
                             Check in
                         </div>
                     </div>
                 </a>
             </div>
             <div class="group">
-                <a href="absen/keluar">
+                <a href="absen/pulang" id="checkout">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 mx-auto">
                         <path fill-rule="evenodd"
                             d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z"
                             clip-rule="evenodd" />
                     </svg>
                     <div class="flex justify-center">
-                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400">
+                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400"
+                            id="checkout_text">
                             Check out
                         </div>
                     </div>
@@ -94,13 +96,32 @@
         {{-- Bottom navbar --}}
         @extends('user_app/bottom_bar')
     </div>
+
+    <script>
+        function showTime() {
+            var WIBTime = moment().format('LTS');
+            document.getElementById('time').innerHTML = WIBTime;
+        }
+
+        const checkIn = document.getElementById("checkin")
+        const checkInTxt = document.getElementById("checkin_text")
+        const checkinStatus = '{{ $masuk }}'
+        const checkOut = document.getElementById("checkout")
+        const checkoutTxt = document.getElementById("checkout_text")
+        const checkoutStatus = '{{ $pulang }}'
+
+        if (checkinStatus != '-') {
+            checkIn.removeAttribute('href');
+            checkIn.classList.add("text-slate-500")
+            checkInTxt.classList.add("group-hover:border-none")
+        }
+
+        if (checkoutStatus != '-') {
+            checkout.removeAttribute('href');
+            checkout.classList.add("text-slate-500")
+            checkoutTxt.classList.add("group-hover:border-none")
+        }
+
+        setInterval(showTime, 1000);
+    </script>
 @endsection
-
-<script type="text/javascript">
-    function showTime() {
-        var WIBTime = moment().format('LTS');
-        document.getElementById('time').innerHTML = WIBTime;
-    }
-
-    setInterval(showTime, 1000);
-</script>

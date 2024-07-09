@@ -25,9 +25,9 @@ Route::get('/', function () {
 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
 
-// Route::middleware(['auth'])->group(function () {
-    Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
+Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat');
     Route::get('profil', [ProfileController::class, 'index'])->name('profile');
@@ -36,4 +36,4 @@ Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('absen/{jenis}/sukses', [AbsenController::class, 'absenSukses'])->name('absenSuccess');
     Route::post('submit_izin', [IzinController::class, 'store']);
     Route::get('izin/sukses', [IzinController::class, 'successIndex'])->name('izin_success');
-// });
+});
