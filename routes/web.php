@@ -29,7 +29,11 @@ Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('home', [HomeController::class, 'index'])->name('home');
+
     Route::get('profil', [ProfileController::class, 'index'])->name('profile');
+    Route::get('edit-profile', [ProfileController::class, 'update'])->name('update-profile');
+    Route::post('edit-profile', [ProfileController::class, 'goUpdate'])->name('go-update-profile');
+
     Route::get('absen/{jenis}', [AbsenController::class, 'checkInOutIndex'])->name('checkInOut');
     Route::post('absen/{jenis}', [AbsenController::class, 'store'])->name('storeAbsen');
     Route::get('absen/{jenis}/sukses', [AbsenController::class, 'absenSukses'])->name('absenSuccess');
@@ -38,5 +42,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat');
     Route::post('riwayat', [RiwayatController::class, 'index'])->name('get-riwayat');
-    
+
 });
