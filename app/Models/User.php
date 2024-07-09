@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Izin::class);
     }
+
+    public function absensis(): HasMany
+    {
+        return $this->hasMany(Absensi::class);
+    }
 }
