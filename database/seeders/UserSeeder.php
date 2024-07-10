@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
             "name" => "Admin",
             "full_name" => "Admin Fullname",
             "email" => "admin@gmail.com",
+            "alamat" => "Cikarang",
+            "no_hp" => "08232437",            
             "password" => Hash::make("password"),
             "role" => "ADMIN"
         ]);
@@ -26,6 +28,8 @@ class UserSeeder extends Seeder
             "name" => "Fajar",
             "full_name" => "Fajar Sidik Prasetio",
             "email" => "fajar@gmail.com",
+            "alamat" => "Cikarang",
+            "no_hp" => "08232437",
             "password" => Hash::make("password"),
             "role" => "USER"
         ]);
