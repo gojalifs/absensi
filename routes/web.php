@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\DataAbsensiController;
+use App\Http\Controllers\admin\DataGuruController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\user\AbsenController;
 use App\Http\Controllers\user\HomeController;
@@ -44,7 +46,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['admin'])->group(function () {
         Route::get('dashboard', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('dashboard');
+        Route::get('data-guru', [DataGuruController::class, 'index'])->name('data-guru');
+        Route::get('data-absensi', [DataAbsensiController::class, 'index'])->name('data-absensi');
     });
-
-
 });

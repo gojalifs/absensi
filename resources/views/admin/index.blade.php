@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="flex overflow-x-hidden">
+    <div class="flex">
         <div class="flex w-1/6">
             <div>
                 @include('admin.includes.sidebar')
