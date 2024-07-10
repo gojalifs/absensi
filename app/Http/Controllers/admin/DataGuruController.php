@@ -20,4 +20,30 @@ class DataGuruController extends Controller
             'users' => $users
         ]));
     }
+
+    public function detailGuru($id)
+    {
+        $url = URL::current();
+
+        $user = User::find($id);
+
+        return view('admin.guru.edit', with([
+            'url' => $url,
+            'user' => $user
+        ]));
+    }
+
+    public function updateGuru(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->full_name = $request->full_name;
+        $user->email = $request->email;
+
+        $user->save();
+
+        session()->put('success', 'Update data sukses');
+
+        return redirect()->route('data-guru');
+    }
 }
