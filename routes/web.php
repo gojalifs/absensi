@@ -19,28 +19,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('app');
-});
-
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('profil', [ProfileController::class, 'index'])->name('profile');
-    Route::get('edit-profile', [ProfileController::class, 'update'])->name('update-profile');
-    Route::post('edit-profile', [ProfileController::class, 'goUpdate'])->name('go-update-profile');
+    Route::middleware(['user'])->group(function () {
+        Route::get('profil', [ProfileController::class, 'index'])->name('profile');
+        Route::get('edit-profile', [ProfileController::class, 'update'])->name('update-profile');
+        Route::post('edit-profile', [ProfileController::class, 'goUpdate'])->name('go-update-profile');
 
-    Route::get('absen/{jenis}', [AbsenController::class, 'checkInOutIndex'])->name('checkInOut');
-    Route::post('absen/{jenis}', [AbsenController::class, 'store'])->name('storeAbsen');
-    Route::get('absen/{jenis}/sukses', [AbsenController::class, 'absenSukses'])->name('absenSuccess');
-    Route::post('submit_izin', [IzinController::class, 'store']);
-    Route::get('izin/sukses', [IzinController::class, 'successIndex'])->name('izin_success');
+        Route::get('absen/{jenis}', [AbsenController::class, 'checkInOutIndex'])->name('checkInOut');
+        Route::post('absen/{jenis}', [AbsenController::class, 'store'])->name('storeAbsen');
+        Route::get('absen/{jenis}/sukses', [AbsenController::class, 'absenSukses'])->name('absenSuccess');
+        Route::post('submit_izin', [IzinController::class, 'store']);
+        Route::get('izin/sukses', [IzinController::class, 'successIndex'])->name('izin_success');
 
-    Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat');
-    Route::post('riwayat', [RiwayatController::class, 'index'])->name('get-riwayat');
+        Route::get('riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+        Route::post('riwayat', [RiwayatController::class, 'index'])->name('get-riwayat');
+    });
+
+    Route::middleware(['admin'])->group(function () {
+        Route::get('dashboard', [\App\Http\Controllers\admin\HomeController::class, 'index'])->name('dashboard');
+    });
+
 
 });

@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
     {{-- Header for map display --}}
     @yield('map_header')
+    @yield('admin_header')
 </head>
 
 <body class="antialiased">
@@ -24,9 +25,16 @@
 
             {{-- @include('includes.sidebar') --}}
 
-            @yield('content')
+            @yield('navbar')
+
+            @yield('sidebar')
 
             {{-- @include('includes.footer') --}}
+
+            @yield('content')
+
+            @yield('includes.footer')
+
 
         </div>
     </div>
