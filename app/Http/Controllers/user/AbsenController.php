@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Absensi;
+use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,10 +15,8 @@ class AbsenController extends Controller
 {
     public function checkInOutIndex(string $jenis)
     {
-        $user = new \stdClass();
-        $user->name = 'Fajar';
-        $user->fullName = 'Fajar Sidik Prasetio';
-
+        $user = Auth::user();
+        
         if ($jenis == 'izin') {
             return view('user_app.absen.izin');
         }
