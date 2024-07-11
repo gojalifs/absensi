@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="flex">
-        <div class="flex w-1/6">
+        <div class="flex w-75">
             <div>
                 @include('admin.includes.sidebar')
             </div>

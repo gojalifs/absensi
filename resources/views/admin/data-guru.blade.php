@@ -2,8 +2,17 @@
 
 @section('admin-content')
     <div class="mx-4">
-        <div class="mx-4 mt-8 text-3xl">
-            Data Guru
+        <div class="mx-4 mt-8">
+            <div class="text-3xl">
+                Data Guru
+            </div>
+            <div class="flex justify-end">
+                <a href="/tambah-guru">
+                    <div class="w-min bg-green-400 px-4 py-1 hover:bg-green-500">
+                        Tambah
+                    </div>
+                </a>
+            </div>
         </div>
         <div class="mt-4">
             <table class="table-auto border border-collapse w-full">
@@ -23,7 +32,8 @@
                                     {{ $key + 1 }}
                                 </td>
                                 <td class="border p-2">
-                                    <input type="text" name="name" id="name" value="{{ $user->full_name }}" disabled>
+                                    <input type="text" name="name" id="name" value="{{ $user->full_name }}"
+                                        disabled>
                                 </td>
                                 <td class="border p-2">
                                     {{ $user->name }}

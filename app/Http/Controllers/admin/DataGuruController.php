@@ -46,4 +46,24 @@ class DataGuruController extends Controller
 
         return redirect()->route('data-guru');
     }
+
+    public function tambahGuru()
+    {
+        $url = URL::current();
+
+        return view('admin.guru.edit', with(['url' => $url]));
+    }
+
+    public function storeTambahGuru(Request $request) {
+        $user = new User;
+        $user->name = $request->name;
+        $user->full_name = $request->full_name;
+        $user->email = $request->email;
+
+        $user->save();
+
+        session()->put('success', 'Tambah data sukses');
+
+        return redirect()->route('data-guru');
+    }
 }

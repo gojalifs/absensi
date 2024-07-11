@@ -22,6 +22,11 @@
                         class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-guru' ? 'bg-sky-200' : '' }}">
                         Data Guru</li>
                 </a>
+                <a href="/data-guru">
+                    <li
+                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-lokasi' ? 'bg-sky-200' : '' }}">
+                        Data Lokasi</li>
+                </a>
             </ul>
         </div>
     </div>

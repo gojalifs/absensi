@@ -49,6 +49,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('data-guru', [DataGuruController::class, 'index'])->name('data-guru');
         Route::get('data-guru/{id}', [DataGuruController::class, 'detailGuru'])->name('detail-guru');
         Route::post('update-guru', [DataGuruController::class, 'updateGuru'])->name('update-guru');
+        Route::get('tambah-guru', [DataGuruController::class, 'tambahGuru'])->name('tambah-guru');
+        Route::post('tambah-guru', [DataGuruController::class, 'storeTambahGuru'])->name('tambah-guru');
 
         Route::get('data-absensi', [DataAbsensiController::class, 'index'])->name('data-absensi');
     });
