@@ -1,6 +1,8 @@
 <div class="bg-slate-50 w-full h-dvh shadow-lg">
     <div class="bg-sky-400 shadow-lg h-32 px-2 content-center text-2xl">SMP N 2 Teluk Jambe Barat</div>
-    <div class="h-[1px] bg-slate-50"></div>
+    <div class="bg-sky-400">
+        <div class="h-[1px] bg-slate-400 mx-8 rounded-lg"></div>
+    </div>
     <div class="text-lg bg-sky-400 pt-2 pb-2 px-2">
         Halo, {{ Auth::user()->name }}
     </div>
@@ -28,6 +30,14 @@
                         Data Lokasi</li>
                 </a>
             </ul>
+            <div class="h-[1px] bg-slate-200 my-4 mx-8 rounded-lg"></div>
+            <div>
+                <a href="{{ route('logout') }}">
+                    <div class="bg-red-400 hover:bg-red-500 text-white px-2 py-1 rounded-md">
+                        Logout
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

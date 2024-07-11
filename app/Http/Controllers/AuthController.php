@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Hash;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -29,5 +30,16 @@ class AuthController extends Controller
             // Todo nanti tambah flash session
             return redirect()->route('login');
         }
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home');
     }
 }
