@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DataAbsensiController;
 use App\Http\Controllers\admin\DataGuruController;
+use App\Http\Controllers\admin\DataLokasiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\user\AbsenController;
 use App\Http\Controllers\user\HomeController;
@@ -53,5 +54,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('tambah-guru', [DataGuruController::class, 'storeTambahGuru'])->name('tambah-guru');
 
         Route::get('data-absensi', [DataAbsensiController::class, 'index'])->name('data-absensi');
+
+        Route::get('data-lokasi', [DataLokasiController::class, 'index'])->name('data.lokasi');
+        Route::post('tambah-lokasi', [DataLokasiController::class, 'store'])->name('add.location');
     });
 });
