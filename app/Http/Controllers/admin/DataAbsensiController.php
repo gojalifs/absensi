@@ -16,10 +16,12 @@ class DataAbsensiController extends Controller
     public function index(Request $request)
     {
         $qjenis = $request->jenis;
+        $qdate = $request->date;
+
         $url = URL::current();
 
         $now = Carbon::now();
-        $date = $now->toDateString();
+        $date = $qdate ?: $now->toDateString();
 
         $today = $now->translatedFormat('l, d F Y');
 
