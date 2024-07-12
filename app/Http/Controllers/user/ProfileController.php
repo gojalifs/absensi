@@ -39,22 +39,28 @@ class ProfileController extends Controller
 
         $file = $request->file('ava');
 
-        $extension = $file->getClientOriginalExtension();
-        $filename = "ava_{$id}.$extension";
+        if (isset($file)) {
+            $extension = $file->getClientOriginalExtension();
+            $filename = "ava_{$id}.$extension";
 
-        $path = $file->storeAs(
-            'public/avatar',
-            $filename
-        );
+            $path = $file->storeAs(
+                'public/avatar',
+                $filename
+            );
 
-        // Return the file path or URL
-        $path = Storage::url('avatar/' . $filename);
+            // Return the file path or URL
+            $path = Storage::url('avatar/' . $filename);
+        }
+
 
         $user = User::find($id);
         $user->name = $name;
         $user->full_name = $full_name;
         $user->email = $email;
-        $user->profile_photo_path = $path;
+
+        if (isset($file)) {
+            $user->profile_photo_path = $path;
+        }
 
         $user->save();
 

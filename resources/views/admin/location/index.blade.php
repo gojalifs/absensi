@@ -59,7 +59,6 @@
             var radius = 50;
             getLocation();
         }
-        console.log(currentLat);
 
         var map = L.map('map').setView([latitude, longitude], 17);
         if (currentLat && currentLng && currentRad) {
@@ -83,19 +82,18 @@
         }).addTo(map);
 
         map.on('click', function(e) {
-            console.log(e);
             if (map.hasLayer(oldMarker)) {
                 map.removeLayer(oldMarker);
             }
             latitude = e.latlng.lat;
             longitude = e.latlng.lng;
+            console.log(latitude);
             const mark = new L.marker([latitude, longitude]).addTo(map);
             oldMarker = mark;
             circle.setLatLng(e.latlng);
         })
 
         function listenRadiusChange(inputRadius) {
-            console.log(inputRadius);
             radius = inputRadius;
             circle.setRadius(radius);
         }
@@ -104,7 +102,6 @@
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showLocation, error);
             } else {
-                console.log('location not supported');
                 var element = document.getElementById("location-allowed").innerHTML =
                     "Perangkat ini tidak mendukung akses lokasi. Coba gunakan perangkat lain.";
             }
@@ -140,25 +137,21 @@
         const submitBtn = document.getElementById('submit');
 
         submitBtn.addEventListener("click", async () => {
-            // submit();
-            submitForm();
+            submit();
 
             lat.value = latitude;
             lng.value = longitude;
         });
 
-        async function submitForm() {
-            console.log(lat);
-        }
-
         async function submit() {
-            console.log('submit');
 
             const data = {
                 lat: latitude,
                 lng: longitude,
                 rad: radius,
             };
+
+            console.log(data.lat);
 
             const route = "{{ route('add.location') }}";
 

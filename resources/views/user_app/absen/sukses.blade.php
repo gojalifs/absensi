@@ -23,7 +23,7 @@
                 Berikut detail absen Anda:
             </div>
             <div class="lg:flex mt-2">
-                <div class="w-full lg:w-1/3 h-40">
+                <div class="w-full lg:w-1/3 h-40 md:h-60">
                     <div id="map" class="bg-red-400 w-full h-full rounded-md"></div>
                 </div>
                 <div class="grow space-y-2 mt-2 lg:mt-0">
@@ -54,7 +54,7 @@
     <script>
         var latitude = '{{ $data->lat }}';
         var longitude = '{{ $data->lng }}';
-        var map = L.map('map').setView([latitude, longitude], 14);
+        var map = L.map('map').setView([latitude, longitude], 17);
         var marker = new L.marker([latitude, longitude]).addTo(map);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

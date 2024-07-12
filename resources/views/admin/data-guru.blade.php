@@ -28,7 +28,6 @@
                     <th class="border p-2">Aksi</th>
                 </thead>
                 <tbody>
-                    @csrf
                     @foreach ($users as $key => $user)
                         <form action="{{ route('guru.delete') }}" method="post" id="form-delete{{ $user->id }}">
                             @csrf
@@ -77,7 +76,6 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-
                                         </div>
                                     </td>
                                 </tr>

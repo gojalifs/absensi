@@ -23,7 +23,7 @@
                 </div>
         </div>
     </div>
-    <div>
+    <div class="mb-16">
         @foreach ($history as $h)
             <div class="border rounded-lg mt-4 p-4 space-y-1">
                 <div class="flex justify-between">
