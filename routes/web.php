@@ -28,7 +28,7 @@ Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    
+
     Route::middleware(['user'])->group(function () {
         Route::get('home', [HomeController::class, 'index'])->name('home');
         Route::get('profil', [ProfileController::class, 'index'])->name('profile');
@@ -52,6 +52,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('update-guru', [DataGuruController::class, 'updateGuru'])->name('update-guru');
         Route::get('tambah-guru', [DataGuruController::class, 'tambahGuru'])->name('tambah-guru');
         Route::post('tambah-guru', [DataGuruController::class, 'storeTambahGuru'])->name('tambah-guru');
+        Route::post('delete-guru', [DataGuruController::class, 'delete'])->name('guru.delete');
 
         Route::get('data-absensi', [DataAbsensiController::class, 'index'])->name('data-absensi');
 
