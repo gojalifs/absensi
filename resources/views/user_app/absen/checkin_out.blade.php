@@ -92,19 +92,20 @@
     </div>
 
     <script>
-        var latitude = null;
-        var longitude = null;
-        var map = L.map('map').setView([-6.2453078, 107.1812406], 16);
+        var latitude = '{{ $location->lat ?: 0 }}';
+        var longitude = '{{ $location->lng ?: 0 }}';
+        var radius = '{{ $location->radius ?: 50 }}';
+        var map = L.map('map').setView([latitude, longitude], 16);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        var circle = L.circle([-6.2453078, 107.1812406], {
+        var circle = L.circle([latitude, longitude], {
             color: 'red',
             fillColor: '#f03',
             fillOpacity: 0.5,
-            radius: 50
+            radius: radius
         }).addTo(map);
 
         function isInCircle(lat, lng) {

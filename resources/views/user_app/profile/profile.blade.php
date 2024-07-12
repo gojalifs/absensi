@@ -40,7 +40,7 @@
             <a href="/change_password" class="bg-sky-500 py-1 px-4 text-white">Ubah Kata Sandi</a>
         </div>
         <div class="mt-4">
-            <a href="/login" class="bg-red-500 py-1 px-4 text-white">Logout</a>
+            <a href="/logout" class="bg-red-500 py-1 px-4 text-white">Logout</a>
         </div>
     </div>
 

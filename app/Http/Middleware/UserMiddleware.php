@@ -17,7 +17,7 @@ class UserMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::user()->role != 'USER') {
-            return redirect()->route('/');
+            return redirect()->route('dashboard');
         }
 
         return $next($request);

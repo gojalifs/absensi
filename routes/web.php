@@ -21,16 +21,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('/');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('home', [HomeController::class, 'index'])->name('home');
-
+    
     Route::middleware(['user'])->group(function () {
+        Route::get('home', [HomeController::class, 'index'])->name('home');
         Route::get('profil', [ProfileController::class, 'index'])->name('profile');
         Route::get('edit-profile', [ProfileController::class, 'update'])->name('update-profile');
         Route::post('edit-profile', [ProfileController::class, 'goUpdate'])->name('go-update-profile');

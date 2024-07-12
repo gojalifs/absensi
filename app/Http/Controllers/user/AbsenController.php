@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Absensi;
+use App\Models\Location;
 use App\Models\User;
 use Auth;
 use Carbon\Carbon;
@@ -16,6 +17,7 @@ class AbsenController extends Controller
     public function checkInOutIndex(string $jenis)
     {
         $user = Auth::user();
+        $location = Location::get()->first();
         
         if ($jenis == 'izin') {
             return view('user_app.absen.izin');
@@ -26,7 +28,8 @@ class AbsenController extends Controller
             with(
                 [
                     'jenis' => $jenis,
-                    'user' => $user
+                    'user' => $user,
+                    'location' => $location,
                 ]
             )
         );
@@ -35,39 +38,39 @@ class AbsenController extends Controller
     public function store(Request $request)
     {
         // try {
-            $user = Auth::user()->id;
+        $user = Auth::user()->id;
 
-            // Ambil data gambar
-            $file = $request->imageData;
-            $imageParts = explode(";base64,", $file);
-            $imageType = str_replace('data:image/', '', $imageParts[0]);
-            $imageData = base64_decode($imageParts[1]);
-            // Create a unique file name
-            $unique = uniqid('absen');
-            $fileName = "absen_{$user}_{$request->jenis}_{$unique}.$imageType";
+        // Ambil data gambar
+        $file = $request->imageData;
+        $imageParts = explode(";base64,", $file);
+        $imageType = str_replace('data:image/', '', $imageParts[0]);
+        $imageData = base64_decode($imageParts[1]);
+        // Create a unique file name
+        $unique = uniqid('absen');
+        $fileName = "absen_{$user}_{$request->jenis}_{$unique}.$imageType";
 
-            // Save the image to the public storage
-            Storage::disk('public')->put('images/' . $fileName, $imageData);
+        // Save the image to the public storage
+        Storage::disk('public')->put('images/' . $fileName, $imageData);
 
-            // Return the file path or URL
-            $filePath = Storage::url('images/' . $fileName);
+        // Return the file path or URL
+        $filePath = Storage::url('images/' . $fileName);
 
-            $absensi = new Absensi;
-            $absensi->user_id = $user;
-            $absensi->jenis = $request->jenis;
-            $absensi->lat = $request->lat;
-            $absensi->lng = $request->lng;
-            $absensi->photo_path = $filePath;
+        $absensi = new Absensi;
+        $absensi->user_id = $user;
+        $absensi->jenis = $request->jenis;
+        $absensi->lat = $request->lat;
+        $absensi->lng = $request->lng;
+        $absensi->photo_path = $filePath;
 
-            $absensi->save();
-            $data = $absensi;
+        $absensi->save();
+        $data = $absensi;
 
-            session()->put('absen_data', $data);
+        session()->put('absen_data', $data);
 
-            return response()->json([
-                'success' => true,
-                'redirect' => route('absenSuccess', $request->jenis),
-            ]);
+        return response()->json([
+            'success' => true,
+            'redirect' => route('absenSuccess', $request->jenis),
+        ]);
         // } catch (\Throwable $th) {
         //     return redirect()->back()->withErrors(['error' => 'Gagal mengajukan izin']);
         // }
