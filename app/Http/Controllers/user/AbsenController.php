@@ -19,7 +19,7 @@ class AbsenController extends Controller
         $user = Auth::user();
         $location = Location::get()->first();
         
-        if ($jenis != 'masuk' || $jenis != 'pulang' ) {
+        if ($jenis != 'masuk' && $jenis != 'pulang' ) {
             return redirect('/');
         }
 

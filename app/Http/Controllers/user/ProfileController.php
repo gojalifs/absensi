@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Storage;
 use URL;
 
@@ -32,11 +33,7 @@ class ProfileController extends Controller
     public function goUpdate(Request $request)
     {
         $id = Auth::user()->id;
-
-        $name = $request->name;
-        $full_name = $request->full_name;
-        $email = $request->email;
-
+        
         $file = $request->file('ava');
 
         if (isset($file)) {
@@ -53,10 +50,18 @@ class ProfileController extends Controller
         }
 
 
-        $user = User::find($id);
-        $user->name = $name;
-        $user->full_name = $full_name;
-        $user->email = $email;
+        $user = User::find($request->id);
+        $user->name = $request->name;
+        $user->full_name = $request->full_name;
+        $user->email = $request->email;
+        $user->jenis_kelamin = $request->gender;
+        $user->alamat = $request->alamat;
+        $user->no_hp = $request->hp;
+        if (isset($request->password)) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
 
         if (isset($file)) {
             $user->profile_photo_path = $path;

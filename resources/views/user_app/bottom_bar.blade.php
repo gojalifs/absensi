@@ -1,8 +1,8 @@
 <div
     class="flex fixed bottom-0 border bg-sky-50 w-full h-16 justify-around 
             items-center text-sm text-slate-500 shadow-lg">
-    <a href="home">
-        <div class="{{ $route == 'https://absensi.test/home' ? 'text-blue-600' : '' }}">
+    <a href="/">
+        <div class="{{ $route == 'https://absensi.test' ? 'text-blue-600' : '' }}">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 mx-auto">
                     <path

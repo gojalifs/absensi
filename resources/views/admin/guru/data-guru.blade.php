@@ -33,6 +33,9 @@
                     <th class="border p-2">Nama Lengkap</th>
                     <th class="border p-2">Nama Panggilan</th>
                     <th class="border p-2">Email</th>
+                    <th class="border p-2">Jenis Kelamin</th>
+                    <th class="border p-2">Alamat</th>
+                    <th class="border p-2">No. HP</th>
                     <th class="border p-2">Foto Guru</th>
                     <th class="border p-2">Aksi</th>
                 </thead>
@@ -57,7 +60,16 @@
                                         {{ $user->email }}
                                     </td>
                                     <td class="border p-2">
-                                        <div class="w-36 md:w-auto">                                            
+                                        {{ $user->jenis_kelamin == 0 ? 'Laki-laki' : 'Perempuan' }}
+                                    </td>
+                                    <td class="border p-2">
+                                        {{ $user->alamat }}
+                                    </td>
+                                    <td class="border p-2">
+                                        {{ $user->no_hp }}
+                                    </td>
+                                    <td class="border p-2">
+                                        <div class="w-36 ">
                                             <img class="w-32 h-32 mx-auto"
                                                 src="{{ $user->profile_photo_path ?? 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg' }}"
                                                 alt="profile">

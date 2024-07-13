@@ -3,7 +3,7 @@
 @section('admin-content')
     <div class="mx-4">
         <div class="mx-auto max-w-[600px]">
-            <form action="/tambah-guru" method="post">
+            <form action="{{ isset($user) ? route('update-guru') : route('tambah-guru') }}" method="post">
                 @csrf
                 <input type="hidden" name="id" id="id" value="{{ $user->id ?? '' }}">
                 <div class="mt-4 flex relative w-fit mx-auto">
@@ -27,16 +27,50 @@
                     </div>
                     <div class="space-y-2">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email"
+                        <input type="email" name="email" id="email"
                             class="border rounded-sm w-full placeholder:text-sm p-2" placeholder="Masukkan email guru . . ."
                             value="{{ $user->email ?? '' }}" required>
                     </div>
+                    <div class="space-y-2">
+                        <div>Jenis Kelamin</div>
+                        <div class="flex space-x-2">
+                            <div>
+                                <input type="radio" name="gender" id="laki-laki" value="0"
+                                    class="border rounded-sm w-full placeholder:text-sm p-2"
+                                    checked="{{ $user->jenis_kelamin == 0 ? 'checked' : null }}"
+                                    placeholder="Masukkan email guru . . ." required>
+                            </div>
+                            <label for="laki-laki">Laki-laki</label>
+                        </div>
+                        <div class="flex space-x-2">
+                            <div>
+                                <input type="radio" name="gender" id="perempuan" value="1"
+                                    class="border rounded-sm w-full placeholder:text-sm p-2"
+                                    checked="{{ $user->jenis_kelamin == 1 ? 'checked' : null }}"
+                                    placeholder="Masukkan email guru . . ." required>
+                            </div>
+                            <label for="perempuan">Perempuan</label>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="alamat">Alamat</label>
+                        <input type="text" name="alamat" id="alamat"
+                            class="border rounded-sm w-full placeholder:text-sm p-2"
+                            placeholder="Masukkan alamat guru . . ." value="{{ $user->alamat ?? '' }}" required>
+                    </div>
+                    <div class="space-y-2">
+                        <label for="hp">No. HP</label>
+                        <input type="text" name="hp" id="hp"
+                            class="border rounded-sm w-full placeholder:text-sm p-2"
+                            placeholder="Masukkan nomor hp guru . . ." value="{{ $user->no_hp ?? '' }}" required>
+                    </div>
+
                     <div class="space-y-2">
                         <label for="email">Kata Sandi</label>
                         <div class="flex">
                             <input type="password" name="password" id="password"
                                 class="border rounded-sm w-full placeholder:text-sm p-2"
-                                placeholder="Masukkan password sementara . . ." required>
+                                placeholder="Masukkan password sementara . . .">
                             <div class="content-center" id="visibility">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                     class="size-6 ml-2" id="visibility-on">

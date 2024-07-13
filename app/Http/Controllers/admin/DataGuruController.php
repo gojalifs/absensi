@@ -16,7 +16,7 @@ class DataGuruController extends Controller
 
         $users = User::where('role', 'USER')->get();
 
-        return view('admin.data-guru', with([
+        return view('admin.guru.data-guru', with([
             'url' => $url,
             'users' => $users
         ]));
@@ -40,6 +40,10 @@ class DataGuruController extends Controller
         $user->name = $request->name;
         $user->full_name = $request->full_name;
         $user->email = $request->email;
+        $user->jenis_kelamin = $request->gender;
+        $user->alamat = $request->alamat;
+        $user->no_hp = $request->hp;
+        $user->password = Hash::make($request->password);
 
         $user->save();
 
@@ -61,6 +65,9 @@ class DataGuruController extends Controller
         $user->name = $request->name;
         $user->full_name = $request->full_name;
         $user->email = $request->email;
+        $user->jenis_kelamin = $request->gender;
+        $user->alamat = $request->alamat;
+        $user->no_hp = $request->hp;
         $user->password = Hash::make($request->password);
 
         $user->save();
