@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [HomeController::class, 'index'])->name('/');
+Route::get('/', [HomeController::class, 'index'])->name('main');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('absen/{jenis}', [AbsenController::class, 'checkInOutIndex'])->name('checkInOut');
         Route::post('absen/{jenis}', [AbsenController::class, 'store'])->name('storeAbsen');
         Route::get('absen/{jenis}/sukses', [AbsenController::class, 'absenSukses'])->name('absenSuccess');
+
+        Route::get('izin', [IzinController::class, 'index'])->name('izin.index');
         Route::post('submit_izin', [IzinController::class, 'store']);
         Route::get('izin/sukses', [IzinController::class, 'successIndex'])->name('izin_success');
 

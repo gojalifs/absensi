@@ -19,8 +19,8 @@ class AbsenController extends Controller
         $user = Auth::user();
         $location = Location::get()->first();
         
-        if ($jenis == 'izin') {
-            return view('user_app.absen.izin');
+        if ($jenis != 'masuk' || $jenis != 'pulang' ) {
+            return redirect('/');
         }
 
         return view(

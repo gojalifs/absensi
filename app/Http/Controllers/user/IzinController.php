@@ -18,6 +18,16 @@ class IzinController extends Controller
         // Set locale to Indonesian
         Carbon::setLocale('id');
     }
+
+    public function index()
+    {
+        $user = Auth::user()->id;
+        $izins = Izin::where('user_id', '=', $user)->get();
+
+        return view('user_app.izin.index')->with([
+            'izins' => $izins
+        ]);
+    }
     public function store(Request $request)
     {
         try {
@@ -87,7 +97,7 @@ class IzinController extends Controller
     {
         $id = $request->id;
         $data = $request->status;
-        
+
         $izin = Izin::find($id);
         $izin->status = $data;
 
