@@ -7,8 +7,17 @@
 
 @section('admin-content')
     <div class="mx-4">
-        <div class="mx-4 mt-8 text-3xl">
-            Data Absensi {{ $day }}
+        <div class="flex mt-8">
+            <div class="md:hidden" id="hamburger" onclick="toggle()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                    <path fill-rule="evenodd"
+                        d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="mx-4 text-3xl">
+                Data Absensi {{ $day }}
+            </div>
         </div>
         <div class="mt-4 flex space-x-4 items-center">
             <div>
@@ -61,7 +70,9 @@
                                     {{ $absen->jenis }}
                                 </td>
                                 <td class="border p-2">
-                                    <img src="{{ $absen->selfie }}" alt="" class="w-40 h-40 mx-auto rounded-md">
+                                    <div class="w-44 md:w-auto">
+                                        <img src="{{ $absen->selfie }}" alt="" class="w-40 h-40 mx-auto rounded-md">
+                                    </div>
                                 </td>
                                 <td class="border p-2">
                                     <script>

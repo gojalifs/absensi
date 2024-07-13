@@ -8,12 +8,20 @@
 @section('admin-content')
     <div>
         <div id="map" class="h-screen z-0"></div>
+        <div class="fixed top-0 right-0 m-4 p-2 bg-white shadow-md rounded-md md:hidden" id="hamburger" onclick="toggle()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path fill-rule="evenodd"
+                    d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                    clip-rule="evenodd" />
+            </svg>
+        </div>
         <form action="{{ route('add.location') }}" method="post">
             @csrf
             <input type="hidden" name="id" id="id" value="{{ $location->id ?? null }}">
             <input type="hidden" name="lat" id="lat">
             <input type="hidden" name="lng" id="lng">
-            <div class="absolute bottom-10 right-0 left-72 shadow-lg bg-white mx-20 rounded-md p-4">
+            <div
+                class="fixed mx-4 md:mx-20 bottom-8 md:absolute md:bottom-10 md:right-0 md:left-72 shadow-lg bg-white rounded-md p-4">
                 <div class="flex items-center">
                     <label for="default-range" class="block mb-4 text-sm px-4 w-full">
                         <ul class="list-disc">
@@ -34,7 +42,7 @@
                 </div>
                 <div class="flex justify-center">
                     <input id="radius" name="rad" type="range" value="50"
-                        class="w-1/2 max-w-[500px] h-2 mb-4 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                        class="w-4/5 md:w-1/2 max-w-[500px] h-2 mb-4 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                         oninput="listenRadiusChange(this.value)" min="10" max="500">
                 </div>
             </div>

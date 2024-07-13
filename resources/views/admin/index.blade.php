@@ -1,9 +1,9 @@
 @extends('app')
 
 @section('content')
-    <div class="flex">
-        <div class="flex w-64 lg:w-80">
-            <div>
+    <div class="md:flex">
+        <div class="hidden md:static fixed z-10 md:flex w-full md:w-64 lg:w-80" id="sidebar">
+            <div class="bg-yellow-400">
                 @include('admin.includes.sidebar')
             </div>
         </div>
@@ -11,4 +11,17 @@
             @yield('admin-content')
         </div>
     </div>
+
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+
+        function toggle() {
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+            }
+        }
+    </script>
 @endsection

@@ -6,8 +6,17 @@
     </script>
     <div class="mx-4">
         <div class="mx-4 mt-8">
-            <div class="text-3xl">
-                Data Guru
+            <div class="flex mt-8 items-center">
+                <div class="md:hidden" id="hamburger" onclick="toggle()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                        <path fill-rule="evenodd"
+                            d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="mx-4 text-3xl">
+                    Data Guru
+                </div>
             </div>
             <div class="flex justify-end">
                 <a href="/tambah-guru">
@@ -48,9 +57,11 @@
                                         {{ $user->email }}
                                     </td>
                                     <td class="border p-2">
-                                        <img class="w-32 h-32 mx-auto"
-                                            src="{{ $user->profile_photo_path ?? 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg' }}"
-                                            alt="profile">
+                                        <div class="w-36 md:w-auto">                                            
+                                            <img class="w-32 h-32 mx-auto"
+                                                src="{{ $user->profile_photo_path ?? 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg' }}"
+                                                alt="profile">
+                                        </div>
                                     </td>
                                     <td class="border p-2">
                                         <div class="flex space-x-2">
@@ -102,4 +113,16 @@
             </table>
         </div>
     </div>
+
+    <script>
+        // const sidebar = document.getElementById('sidebar');
+
+        function toggle() {
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+            }
+        }
+    </script>
 @endsection

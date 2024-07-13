@@ -1,5 +1,16 @@
 <div class="bg-slate-50 w-full h-dvh shadow-lg">
-    <div class="bg-sky-400 shadow-lg h-32 px-2 content-center text-2xl">SMP N 2 Teluk Jambe Barat</div>
+    <div class="flex justify-between bg-sky-400 shadow-lg h-32 px-2 content-center text-2xl">
+        <div class="mt-4">            
+            SMP N 2 Telukjambe Barat
+        </div>
+        <div class="mt-4 md:hidden" onclick="toggle()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                <path fill-rule="evenodd"
+                    d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+                    clip-rule="evenodd" />
+            </svg>
+        </div>
+    </div>
     <div class="bg-sky-400">
         <div class="h-[1px] bg-slate-400 mx-8 rounded-lg"></div>
     </div>
