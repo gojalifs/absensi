@@ -3,7 +3,7 @@
 @section('content')
     <div class="justify-center p-4 text-slate-800">
         <div class="text-center text-3xl py-6">
-            e-presensi SMK N xxx
+            e-presensi SMP N 2 Telukjambe
         </div>
         <div class="justify-center flex">
             <form action="{{ route('login') }}" method="POST"

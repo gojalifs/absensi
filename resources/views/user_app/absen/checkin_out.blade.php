@@ -147,7 +147,7 @@
 
         function getLocation() {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showMarker, error);
+                navigator.geolocation.getCurrentPosition(showLocation, error);
             } else {
                 console.log('location not supported');
                 var element = document.getElementById("location-allowed").innerHTML =

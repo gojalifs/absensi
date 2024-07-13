@@ -22,11 +22,11 @@
             <div class="mt-4">
                 Berikut detail absen Anda:
             </div>
-            <div class="lg:flex mt-2">
-                <div class="w-full lg:w-1/3 h-40 md:h-60">
+            <div class="md:flex mt-2">
+                <div class="w-full md:w-1/3 h-40 md:h-60">
                     <div id="map" class="bg-red-400 w-full h-full rounded-md"></div>
                 </div>
-                <div class="grow space-y-2 mt-2 lg:mt-0">
+                <div class="grow space-y-2 mt-2 md:mt-0 md:ml-8">
                     <div class="flex">
                         <div class="w-1/2">Jenis</div>
                         <div>: Absen {{ $data->jenis }}</div>

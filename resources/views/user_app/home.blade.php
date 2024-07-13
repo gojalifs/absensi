@@ -45,7 +45,7 @@
 
         {{-- Menu Utama --}}
         <div class="px-4 mt-4 sm:text-3xl sm:mt-8 sm:mb-4">Menu Utama</div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 text-sm py-6 px-8 sm:max-w-[700px] mx-auto">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 text-sm py-6 px-8 sm:max-w-[700px] mx-auto">
             <div class="group">
                 <a href="absen/masuk" id="checkin">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 mx-auto">
@@ -76,7 +76,7 @@
                     </div>
                 </a>
             </div>
-            <div class="mt-4 group">
+            <div class="group">
                 <a href="absen/izin">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-12 mx-auto">
                         <path
