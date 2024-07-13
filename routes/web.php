@@ -30,7 +30,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::middleware(['user'])->group(function () {
-        Route::get('home', [HomeController::class, 'index'])->name('home');
         Route::get('profil', [ProfileController::class, 'index'])->name('profile');
         Route::get('edit-profile', [ProfileController::class, 'update'])->name('update-profile');
         Route::post('edit-profile', [ProfileController::class, 'goUpdate'])->name('go-update-profile');
