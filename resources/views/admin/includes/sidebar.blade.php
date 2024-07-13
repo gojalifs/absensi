@@ -40,6 +40,11 @@
                         class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-lokasi' ? 'bg-sky-200' : '' }}">
                         Data Lokasi</li>
                 </a>
+                <a href="{{ route('data.izin') }}">
+                    <li
+                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-izin' ? 'bg-sky-200' : '' }}">
+                        Data Izin</li>
+                </a>
             </ul>
             <div class="h-[1px] bg-slate-200 my-4 mx-8 rounded-lg"></div>
             <div>

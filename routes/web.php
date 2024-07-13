@@ -58,5 +58,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('data-lokasi', [DataLokasiController::class, 'index'])->name('data.lokasi');
         Route::post('tambah-lokasi', [DataLokasiController::class, 'store'])->name('add.location');
+
+        Route::get('data-izin', [IzinController::class, 'adminIndex'])->name('data.izin');
+        Route::post('data-izin', [IzinController::class, 'update'])->name('izin.ubah');
     });
 });

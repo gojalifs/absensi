@@ -8,6 +8,7 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 
 class IzinController extends Controller
 {
@@ -67,5 +68,33 @@ class IzinController extends Controller
         ];
 
         return view('user_app/izin/sukses', with($data));
+    }
+
+    public function adminIndex()
+    {
+        $url = URL::current();
+        $izin = Izin::orderBy('status')->orderBy('created_at', 'desc')->get();
+        $izinSudah = Izin::where('status', '=', 'sudah')->orWhere('status', '=', 'tolak')->get();
+
+        return view('admin.izin.index')->with([
+            'url' => $url,
+            'izinBelum' => $izin,
+            'izinSudah' => $izinSudah,
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $id = $request->id;
+        $data = $request->status;
+        
+        $izin = Izin::find($id);
+        $izin->status = $data;
+
+        $result = $izin->save();
+
+        if ($result) {
+            return redirect()->route('data.izin');
+        }
     }
 }

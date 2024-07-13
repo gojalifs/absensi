@@ -16,6 +16,7 @@ class Izin extends Model
         'keterangan',
         'photo_path',
         'catatan',
+        'status',
         'created_at',
         'updated_at'
     ];

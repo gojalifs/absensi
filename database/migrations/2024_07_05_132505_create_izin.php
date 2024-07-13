@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->enum('keterangan', ['sakit', 'izin']);
             $table->string('photo_path');
             $table->string('catatan');
+            $table->enum('status', ['sudah', 'belum', 'tolak']);
             $table->timestamps();
         });
     }
