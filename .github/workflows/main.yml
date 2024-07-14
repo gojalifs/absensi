@@ -39,6 +39,7 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
+            echo 'test'
             cd ${{ secrets.DEPLOY_TARGET }}
             ./deploy.sh"
 
