@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('alamat');
             $table->string('no_hp');
-            $table->enum('role', ['ADMIN', 'USER'])->default('ADMIN');
+            $table->enum('role', ['ADMIN', 'USER'])->default('USER');
             $table->string('photo_path')->nullable();
             $table->string('email')->unique();
             $table->string('password');
