@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->decimal('lng');
             $table->unsignedTinyInteger('izin')->default(0);
             $table->unsignedBigInteger('izin_id');
-            $table->foreign('izin_id')->references('id')->on('izin')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('izin_id')->references('id')->on('izins')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
