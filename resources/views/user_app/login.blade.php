@@ -12,6 +12,11 @@
                 <div class="text-center font-medium text-3xl my-8 text-blue-800">
                     Silahkan Login
                 </div>
+                @if (Session::has('error'))
+                    <div class="text-red-400">
+                        {{ Session::get('error') }}
+                    </div>
+                @endif
                 <div>
                     <div>
                         <label for="email">{{ __('Email') }} <span class="text-rose-500">*</span></label>

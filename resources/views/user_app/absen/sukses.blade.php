@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="flex">
-                <a href="/home" class="bg-sky-400 mx-auto mt-4 p-2 text-white shadow-md rounded-xl">Kembali ke Beranda</a>
+                <a href="/" class="bg-sky-400 mx-auto mt-4 p-2 text-white shadow-md rounded-xl">Kembali ke Beranda</a>
             </div>
         </div>
     </div>

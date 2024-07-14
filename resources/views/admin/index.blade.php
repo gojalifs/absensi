@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="md:flex">
-        <div class="hidden md:static fixed z-10 md:flex w-full md:w-64 lg:w-80" id="sidebar">
+        <div class="hidden md:static fixed z-10 md:flex w-screen md:w-64 lg:w-80" id="sidebar">
             <div class="bg-yellow-400">
                 @include('admin.includes.sidebar')
             </div>

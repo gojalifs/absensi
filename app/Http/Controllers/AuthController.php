@@ -28,7 +28,9 @@ class AuthController extends Controller
             return redirect()->route('home');
         } else {
             // Todo nanti tambah flash session
-            return redirect()->route('login');
+
+            return redirect()->route('login')
+                ->with(['error' => 'Email atau Kata sandi salah']);
         }
     }
 
