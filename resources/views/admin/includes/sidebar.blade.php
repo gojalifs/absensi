@@ -22,27 +22,27 @@
             <ul class="space-y-2">
                 <a href="/">
                     <li
-                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/dashboard' ? 'bg-sky-200' : '' }}">
+                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'dashboard' ? 'bg-sky-200' : '' }}">
                         Dashboard</li>
                 </a>
                 <a href="/data-absensi">
                     <li
-                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-absensi' ? 'bg-sky-200' : '' }}">
+                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'data-absensi' ? 'bg-sky-200' : '' }}">
                         Data Absensi</li>
                 </a>
                 <a href="/data-guru">
                     <li
-                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-guru' ? 'bg-sky-200' : '' }}">
+                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'data-guru' ? 'bg-sky-200' : '' }}">
                         Data Guru</li>
                 </a>
                 <a href="{{ route('data.lokasi') }}">
                     <li
-                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-lokasi' ? 'bg-sky-200' : '' }}">
+                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'data-lokasi' ? 'bg-sky-200' : '' }}">
                         Data Lokasi</li>
                 </a>
                 <a href="{{ route('data.izin') }}">
                     <li
-                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'https://absensi.test/data-izin' ? 'bg-sky-200' : '' }}">
+                        class="hover:bg-sky-300 rounded-md p-2 {{ $url == 'data-izin' ? 'bg-sky-200' : '' }}">
                         Data Izin</li>
                 </a>
             </ul>

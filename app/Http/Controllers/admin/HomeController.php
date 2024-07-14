@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         $url = URL::current();
+        $url = explode('/', $url);
 
         $now = Carbon::now();
         $date = $now->day;
@@ -29,7 +30,7 @@ class HomeController extends Controller
             ->count();
 
         return view('admin.dashboard', with([
-            'url'=> $url,
+            'url' => end($url),
             'count' => $count,
             'absenCount' => $absenCount
         ]));

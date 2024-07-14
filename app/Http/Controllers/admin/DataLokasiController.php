@@ -12,10 +12,11 @@ class DataLokasiController extends Controller
     public function index()
     {
         $url = URL::current();
+        $url = explode('/', $url);
         $location = Location::first();
 
         return view('admin.location.index', with([
-            'url' => $url,
+            'url' => end($url),
             'location' => $location
         ]));
     }

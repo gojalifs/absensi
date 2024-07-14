@@ -19,6 +19,7 @@ class DataAbsensiController extends Controller
         $qdate = $request->date;
 
         $url = URL::current();
+        $url = explode('/', $url);
 
         $now = Carbon::now();
         $date = $qdate ?: $now->toDateString();
@@ -66,7 +67,7 @@ class DataAbsensiController extends Controller
             'jenis' => $qjenis,
             'day' => $today,
             'date' => $date,
-            'url' => $url,
+            'url' => end($url),
             'absensis' => (object) $result
         ]));
     }

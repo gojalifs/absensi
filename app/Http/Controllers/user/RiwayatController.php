@@ -14,6 +14,7 @@ class RiwayatController extends Controller
     public function index(Request $request)
     {
         $url = URL::current();
+        $url = explode('/', $url);
 
         if ($request->month) {
             $monthYear = explode('-', $request->month);
@@ -80,7 +81,7 @@ class RiwayatController extends Controller
             // array_splice
         }
         return view('user_app.riwayat.index', with([
-            'route' => $url,
+            'route' =>end( $url),
             'history' => array_reverse($result),
             'bulan' => $bulan
         ]));

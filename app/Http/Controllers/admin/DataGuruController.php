@@ -13,11 +13,12 @@ class DataGuruController extends Controller
     public function index()
     {
         $url = URL::current();
+        $url = explode('/', $url);
 
         $users = User::where('role', 'USER')->get();
 
         return view('admin.guru.data-guru', with([
-            'url' => $url,
+            'url' => end($url),
             'users' => $users
         ]));
     }
@@ -25,11 +26,12 @@ class DataGuruController extends Controller
     public function detailGuru($id)
     {
         $url = URL::current();
+        $url = explode('/', $url);
 
         $user = User::find($id);
 
         return view('admin.guru.edit', with([
-            'url' => $url,
+            'url' => end($url),
             'user' => $user
         ]));
     }
@@ -55,8 +57,9 @@ class DataGuruController extends Controller
     public function tambahGuru()
     {
         $url = URL::current();
+        $url = explode('/', $url);
 
-        return view('admin.guru.edit', with(['url' => $url]));
+        return view('admin.guru.edit', with(['url' => end($url)]));
     }
 
     public function storeTambahGuru(Request $request)

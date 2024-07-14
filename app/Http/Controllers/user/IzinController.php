@@ -83,11 +83,12 @@ class IzinController extends Controller
     public function adminIndex()
     {
         $url = URL::current();
+        $url = explode('/', $url);
         $izin = Izin::orderBy('status')->orderBy('created_at', 'desc')->get();
         $izinSudah = Izin::where('status', '=', 'sudah')->orWhere('status', '=', 'tolak')->get();
 
         return view('admin.izin.index')->with([
-            'url' => $url,
+            'url' => end($url),
             'izinBelum' => $izin,
             'izinSudah' => $izinSudah,
         ]);

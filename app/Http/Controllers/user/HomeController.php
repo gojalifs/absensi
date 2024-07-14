@@ -46,7 +46,7 @@ class HomeController extends Controller
         }
 
         return view('user_app.home', with([
-            'route' => $url,
+            'route' => '/',
             'user' => $user,
             'masuk' => $timeMasuk ?? '-',
             'pulang' => $timePulang ?? '-'

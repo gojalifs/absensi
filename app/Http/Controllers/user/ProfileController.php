@@ -15,10 +15,11 @@ class ProfileController extends Controller
     public function index()
     {
         $url = URL::current();
+        $url = explode('/', $url);
         $user = Auth::user();
 
         return view('user_app.profile.profile', with([
-            'route' => $url,
+            'route' => end($url),
             'user' => $user
         ]));
     }
@@ -33,7 +34,7 @@ class ProfileController extends Controller
     public function goUpdate(Request $request)
     {
         $id = Auth::user()->id;
-        
+
         $file = $request->file('ava');
 
         if (isset($file)) {
