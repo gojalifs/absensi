@@ -1,0 +1,111 @@
+name: Deploy Laravel on ECS
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    #   - name: Create env  # Assuming these lines create environment variables
+    #     run: |
+    #       echo "REACT_APP_GITHUB_TOKEN=${{ secrets.REACT_APP_GITHUB_TOKEN }}" >> "$GITHUB_ENV"
+    #       echo "GITHUB_USERNAME=${{ secrets.GITHUB_USERNAME }}" >> "$GITHUB_ENV"
+    #       echo "USE_GITHUB_DATA=${{ secrets.USE_GH_DATA }}" >> "$GITHUB_ENV"
+
+      - name: Checkout code (limited depth)
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      # - name: Create env 
+      #   uses: SpicyPizza/create-envfile@v2.0
+      #   with:
+      #     envkey_REACT_APP_GITHUB_TOKEN: ${{ secrets.REACT_APP_GITHUB_TOKEN }}
+      #     envkey_GITHUB_USERNAME: "gojalifs"
+      #     envkey_USE_GITHUB_DATA: ${{ secrets.USE_GH_DATA }}
+      # - run: cat .env
+
+      # Authenticate to the the server via ssh 
+      # and run our deployment script 
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.ECS_USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd ${{ secrets.DEPLOY_TARGET }}
+            ./deploy.sh"
+
+      # - name: Use Node.js ${{ matrix.node-version }}
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+      #     cache: 'npm'
+
+      # - run: npm ci
+      # - run: npm run build --if-present
+      # - run: npm test
+
+      # - name: executing remote ssh commands using password
+      #   uses: appleboy/ssh-action@v1.0.3
+      #   with:
+      #     host: ${{ secrets.DEPLOY_HOST }}
+      #     username: ${{ secrets.ECS_USERNAME }}
+      #     key: ${{ secrets.KEY }}
+      #     port: ${{ secrets.PORT }}
+      #     passphrase: ${{ secrets.PASSPHRASE }}
+      #     script: |
+      #       ls
+      #       cd ${{ secrets.DEPLOY_TARGET }}
+
+      #   # working-directory: ./build
+      # - run: ls
+      # - run: sudo scp -R build/* ${{ secrets.ECS_USERNAME }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_TARGET_VAR }}
+      # - run: cd build/
+        # copy built file into server
+      # # - uses: actions/checkout@v4
+      # - name: copy file via ssh password
+      #   uses: appleboy/scp-action@v0.1.7
+      #   with:
+      #     host: ${{ secrets.DEPLOY_HOST }}
+      #     username: ${{ secrets.ECS_USERNAME }}
+      #     key: ${{ secrets.KEY }}
+      #     port: ${{ secrets.PORT }}
+      #     passphrase: ${{ secrets.PASSPHRASE }}
+      #     source: "build/"
+      #     strip_components: 1
+      #     target: ${{ secrets.DEPLOY_TARGET }}
+      #       # scp -R build/* ${{ secrets.ECS_USERNAME }}@${{ secrets.DEPLOY_HOST }}:${{ secrets.DEPLOY_TARGET }}
+
+# Removed commented-out build and deploy steps
+
+          
+      #   env:
+      #     SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
+      #     # Avoid storing private key path directly (use secret)
+      #     # SSH_PRIVATE_KEY_PATH: ""
+
+      # - name: Build Node.js app
+      #   run: |
+      #     npm install
+      #     npm run build  # Replace with your build command
+
+      # - name: Deploy to ECS via SSH
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.ECS_HOST }}
+      #     username: ${{ secrets.ECS_USERNAME }}
+      #     # Reference private key path from secret (not directly)
+      #     key: ${{ secrets.SSH_PRIVATE_KEY_PATH }}
+      #     port: 22  # Adjust if using a different SSH port
+      #     script: |
+      #       cd /path/to/deployment/directory  # Replace with the path on your ECS instance
+      #       git pull
+      #       npm install
+      #       npm start  # Replace with your Node.js app startup command
