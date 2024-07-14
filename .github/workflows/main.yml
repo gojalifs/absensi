@@ -37,7 +37,6 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.ECS_USERNAME }}
           port: ${{ secrets.PORT }}
-          passphrase: ${{ secrets.PASSPHRASE }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
             cd ${{ secrets.DEPLOY_TARGET }}
