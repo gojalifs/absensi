@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,8 +14,46 @@ class RiwayatController extends Controller
 {
     public function index(Request $request)
     {
+        if ($request->month) {
+
+            $startDate = Carbon::parse($request->month)->startOfMonth();
+            $endDate = $startDate->copy()->endOfMonth();
+            $monthYear = explode('-', $request->month);
+            $month = $monthYear[1];
+            $year = $monthYear[0];
+
+            $bulan = $request->month;
+        } else {
+            $now = Carbon::now();
+            $month = $now->month;
+            $year = $now->year;
+
+            $bulan = $now->format('Y-m');
+            $startDate = Carbon::now()->startOfMonth();
+            $endDate = Carbon::now();
+        }
+
+        $dates = [];
+        while ($startDate->lte($endDate)) {
+            $dateString = $startDate->format('Y-m-d');
+            $m = Carbon::parse($dateString);
+            $date = (object) [
+                'date' => $dateString,
+            ];
+
+            if ($m->isWeekend()) {
+                $date->kerja = 'libur';
+            } else {
+                $date->kerja = 'kerja';
+            }
+
+            array_push($dates, $date);
+            $startDate->addDay();
+        }
+
         $url = URL::current();
         $url = explode('/', $url);
+        $user = Auth::user()->id;
 
         if ($request->month) {
             $monthYear = explode('-', $request->month);
@@ -32,6 +71,7 @@ class RiwayatController extends Controller
 
         $riwayat = DB::table('absensis')
             ->join('users', 'absensis.user_id', '=', 'users.id')
+            ->where('users.id', '=', $user)
             ->whereMonth('absensis.created_at', '=', $month)
             ->whereYear('absensis.created_at', '=', $year)
             ->select(['absensis.jenis', 'absensis.created_at'])
@@ -39,49 +79,42 @@ class RiwayatController extends Controller
             ->get();
 
         $result = [];
+        Log::debug(json_encode($dates));
 
-        foreach ($riwayat as $key => $value) {
-            $formattedTime = Carbon::parse($value->created_at)->translatedFormat('H.i');
-            $formattedDate = Carbon::parse($value->created_at)->translatedFormat('d F Y');
-            $dayOut = Carbon::parse($value->created_at)->translatedFormat('d');
-            Log::debug("value pertama {$value->jenis}");
-            if ($value->jenis == 'PULANG') {
-                $last = count($result) - 1;
+        foreach ($dates as $date) {
+            $data = (object) [
+                'date' => $date->date,
+                'kerja' => $date->kerja,
+                'masuk' => '',
+                'pulang' => '',
+            ];
 
-                if ($last > 0) {
-
-                    if ($result[$last]->jenis == 'MASUK') {
-                        $dayIn = Carbon::parse($value->created_at)->translatedFormat('d');
-                        if ($dayIn == $dayOut) {
-                            $result[$last]->pulang = $formattedTime;
-                        } else {
-                            $value->pulang = $formattedTime;
-                        }
-                    } else {
-                        $value->pulang = $formattedTime;
-                    }
-                } else {
-                    $value->pulang = $formattedTime;
-                    $value->date = $formattedDate;
-                    $data = json_decode(json_encode($value), true);
-                    array_push($result, (object) $data);
+            $any = false;
+            foreach ($riwayat as $key => $r) {
+                $d = Carbon::parse($r->created_at)->format('Y-m-d');
+                if ($d != $date->date) {
+                    break;
                 }
 
-                Log::debug('di masuk' . json_encode($result));
+                $data->date = $d;
+                $clock = Carbon::parse($r->created_at)->format('H.i');
 
-                continue;
+                if ($r->jenis == 'MASUK') {
+                    $data->masuk = $clock;
+                } else {
+                    $data->pulang = $clock;
+                }
+
+                $any = true;
+                unset($riwayat[$key]);
             }
-            if ($value->jenis == 'MASUK') {
-                $value->masuk = $formattedTime;
-            }
-            Log::debug(json_encode($result));
-            $value->date = $formattedDate;
-            $data = json_decode(json_encode($value), true);
-            array_push($result, (object) $data);
-            // array_splice
+
+            array_push($result, $data);
+            $any = false;
         }
+
         return view('user_app.riwayat.index', with([
-            'route' =>end( $url),
+            'route' => end($url),
             'history' => array_reverse($result),
             'bulan' => $bulan
         ]));

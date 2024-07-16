@@ -26,31 +26,35 @@
         </div>
         <div class="mb-16">
             @foreach ($history as $h)
-                <div class="border rounded-lg mt-4 p-4 space-y-1">
+                <div
+                    class="border rounded-lg mt-4 p-4 space-y-1 {{ $h->kerja != 'kerja' ? 'bg-slate-100 text-slate-500' : '' }}">
                     <div class="flex justify-between">
                         <div>
                             {{ $h->date }}
                         </div>
-                        <div class="font-bold">Hadir</div>
+                        <div class="font-bold">{{ $h->kerja == 'kerja' ? '' : 'Libur' }}</div>
                     </div>
                     <div class="h-[1px] bg-slate-300"></div>
                     <div class="flex justify-between">
-                        <div class="text-slate-600">Masuk</div>
+                        <div class="{{ $h->kerja != 'kerja' ? 'bg-slate-100 text-slate-500' : 'text-slate-600' }}">Masuk
+                        </div>
                         <div>
-                            @if (isset($h->masuk))
-                                {{ $h->masuk ?? '-' }}
+                            @if ($h->masuk)
+                                {{ $h->masuk }}
                             @else
-                                <div class="text-red-500">Belum absen</div>
+                                <div class="{{ $h->kerja == 'libur' ? '' : 'text-red-500' }}">
+                                    {{ $h->kerja == 'libur' ? '-' : 'Belum absen' }}</div>
                             @endif
                         </div>
                     </div>
                     <div class="flex justify-between">
-                        <div class="text-slate-600">Pulang</div>
+                        <div {{ $h->kerja != 'kerja' ? 'bg-slate-100 text-slate-500' : 'text-slate-600' }}>Pulang</div>
                         <div>
-                            @if (isset($h->pulang))
-                                {{ $h->pulang ?? '-' }}
+                            @if ($h->pulang)
+                                {{ $h->pulang }}
                             @else
-                                <div class="text-red-500">Belum absen</div>
+                                <div class="{{ $h->kerja == 'libur' ? '' : 'text-red-500' }}">
+                                    {{ $h->kerja == 'libur' ? '-' : 'Belum absen' }}</div>
                             @endif
                         </div>
                     </div>
