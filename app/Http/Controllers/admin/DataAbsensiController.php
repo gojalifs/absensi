@@ -52,7 +52,7 @@ class DataAbsensiController extends Controller
             $data->time = Carbon::parse($value->created_at)->translatedFormat('H.i');
             $data->jenis = $value->jenis;
             $data->selfie = $value->photo_path;
-            $data->lokasi = [
+            $data->lokasi = (object) [
                 'lat' => $value->lat,
                 'lng' => $value->lng,
             ];

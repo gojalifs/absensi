@@ -47,7 +47,7 @@
                     <th class="border p-2">Jenis</th>
                     <th class="border p-2">Selfie</th>
                     <th class="border p-2">Lokasi</th>
-                    {{-- <th class="border p-2">Aksi</th> --}}
+                    <th class="border p-2">Koordinat</th>
                 </thead>
                 <tbody>
                     @foreach ($absensis as $key => $absen)
@@ -88,6 +88,14 @@
                                         });
                                     </script>
                                     <div class="bg-red-400 w-40 h-40 mx-auto" id="map{{ $absen->id }}">
+                                    </div>
+                                </td>
+                                <td class="border p-2">
+                                    <div>
+                                        {{ $absen->lokasi['lat'] }}
+                                    </div>
+                                    <div>
+                                        {{ $absen->lokasi['lng'] }}
                                     </div>
                                 </td>
                             </tr>
