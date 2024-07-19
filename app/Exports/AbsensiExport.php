@@ -40,7 +40,8 @@ class AbsensiExport implements FromCollection, WithHeadings
                     DATE_FORMAT(a.created_at, '%H:%i') as Jam,
                     a.jenis, a.lat, a.lng
                     FROM `absensis` a inner join users u 
-                    where month(a.created_at) = $this->month and year(a.created_at) = $this->year;");
+                    where month(a.created_at) = $this->month and year(a.created_at) = $this->year
+                    order by a.created_at asc;");
 
                     // dd(json_encode($data));
 
