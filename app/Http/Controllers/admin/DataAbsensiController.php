@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\AbsensiExport;
 use App\Http\Controllers\Controller;
 use App\Models\Absensi;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use URL;
 use Illuminate\Support\Facades\Log;
 
@@ -13,6 +15,13 @@ Log::debug('test');
 
 class DataAbsensiController extends Controller
 {
+    public function __construct()
+    {
+
+        // Set locale to Indonesian
+        Carbon::setLocale('id');
+    }
+
     public function index(Request $request)
     {
         $qjenis = $request->jenis;
@@ -25,6 +34,7 @@ class DataAbsensiController extends Controller
         $date = $qdate ?: $now->toDateString();
 
         $today = $now->translatedFormat('l, d F Y');
+        $monthYear = Carbon::parse($date)->format('Y-m');
 
         if (isset($qjenis) && $qjenis != 'semua') {
             $absensis = Absensi::join('users', 'absensis.user_id', '=', 'users.id')
@@ -67,8 +77,19 @@ class DataAbsensiController extends Controller
             'jenis' => $qjenis,
             'day' => $today,
             'date' => $date,
+            'month' => $monthYear,
             'url' => end($url),
             'absensis' => (object) $result
         ]));
+    }
+
+    public function report(Request $request)
+    {
+        $monthYear = explode('-', $request->month);
+        $year = $monthYear[0] ?: Carbon::now()->year;
+        $month = $monthYear[1] ?: Carbon::now()->month;
+        $monthName = Carbon::parse($request->month)->translatedFormat('F Y');
+
+        return Excel::download(new AbsensiExport($month, $year), "absensi_bulan {$monthName}.xlsx");
     }
 }

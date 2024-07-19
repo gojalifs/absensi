@@ -62,5 +62,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('data-izin', [IzinController::class, 'adminIndex'])->name('data.izin');
         Route::post('data-izin', [IzinController::class, 'update'])->name('izin.ubah');
+
+        Route::post('export-excel', [DataAbsensiController::class, 'report'])->name('export.excel');
     });
 });

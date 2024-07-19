@@ -19,22 +19,33 @@
                 Data Absensi {{ $day }}
             </div>
         </div>
-        <div class="mt-4 flex space-x-4 items-center">
-            <div>
-                Filter
+        <div class="mt-4 flex justify-between">
+            <div class="flex items-center">
+                <div>
+                    Filter
+                </div>
+                <div class="pl-8">
+                    <label for="date" class="pr-4">Tanggal</label>
+                    <input type="date" name="date" id="date" value="{{ $date }}" class="border p-2">
+                </div>
+                <div class="pl-4">
+                    <label for="jenis" class="pr-4">Jenis</label>
+                    <select name="jenis" id="jenis" class="p-2 px-4 border cursor-pointer">
+                        <option value="semua" class="px-2">Semua</option>
+                        <option value="masuk" class="px-2">Masuk
+                        </option>
+                        <option value="pulang" class="px-2">Pulang</option>
+                    </select>
+                </div>
             </div>
-            <div class="pl-8">
-                <label for="date" class="pr-4">Tanggal</label>
-                <input type="date" name="date" id="date" value="{{ $date }}" class="border p-2">
-            </div>
-            <div class="pl-4">
-                <label for="jenis" class="pr-4">Jenis</label>
-                <select name="jenis" id="jenis" class="p-2 px-4 border cursor-pointer">
-                    <option value="semua" class="px-2">Semua</option>
-                    <option value="masuk" class="px-2">Masuk
-                    </option>
-                    <option value="pulang" class="px-2">Pulang</option>
-                </select>
+            <div class="flex space-x-4 items-center">
+                <form action="{{ route('export.excel') }}" method="post" class="flex">
+                    @csrf
+                    <button class="underline text-sky-500">Ekspor Excel Untuk Bulan</button>
+                    <input type="month" name="month" id="month" class="ml-4 rounded-md p-2 border">
+                </form>
+                <div>
+                </div>
             </div>
         </div>
         <div class="mt-4">
@@ -108,6 +119,8 @@
 
     <script>
         $(document).ready(function() {
+            document.getElementById('month').defaultValue = "{{ $month }}"
+
             const jenis = document.getElementById('jenis');
             const date = document.getElementById('date');
 
