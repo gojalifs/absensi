@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('alamat');
             $table->string('no_hp');
             $table->enum('role', ['ADMIN', 'USER'])->default('USER');
-            $table->string('photo_path')->nullable();
+            $table->string('profile_photo_path')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
