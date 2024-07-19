@@ -41,7 +41,7 @@ jobs:
           script: |
             echo 'test'
             cd ${{ secrets.DEPLOY_TARGET }}
-            ./deploy.sh"
+            ./deploy.sh
 
       # - name: Use Node.js ${{ matrix.node-version }}
       #   uses: actions/setup-node@v3
