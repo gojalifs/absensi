@@ -33,20 +33,22 @@ class Controller extends BaseController
                 ],
                 (object) [
                     'title' => 'Absensi',
-                    'route' => '',
                     'current' => 'absen/',
                     'icon' => '/static/assessment.png',
                     'child' => (object) [
                         (object) [
                             'title' => 'Absen Masuk',
+                            'current' => 'masuk',
                             'route' => route('checkInOut', 'masuk'),
                         ],
                         (object) [
                             'title' => 'Absen Pulang',
+                            'current' => 'pulang',
                             'route' => route('checkInOut', 'pulang'),
                         ],
                         (object) [
                             'title' => 'Tidak Masuk',
+                            'current' => 'izin',
                             'route' => route('izin.index'),
                         ],
                     ],

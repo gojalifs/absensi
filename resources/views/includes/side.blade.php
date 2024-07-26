@@ -26,7 +26,10 @@
                             aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <img src="{{ $s->icon }}" alt="" class="w-8">
                             <span
-                                class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">{{ $s->title }}</span>
+                                class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap
+                                {{ str_contains(URL::current(), $s->current) ? 'text-red-600' : '' }}">
+                                {{ $s->title }}
+                            </span>
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -37,7 +40,8 @@
                             @foreach ($s->child as $item)
                                 <li>
                                     <a href="{{ $item->route }}"
-                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700
+                                        {{ str_contains(URL::current(), $item->current) ? 'text-red-600' : '' }}">
                                         {{ $item->title }}
                                     </a>
                                 </li>

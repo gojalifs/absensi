@@ -14,7 +14,7 @@
                 <img src="{{ $data->photo_path }}" alt="" class="w-64 h-64 mx-auto rounded-lg">
             </div>
             <div class="mt-4 text-xl text-center">
-                Selamat, <span class="font-medium"> Fajar Sidik Prasetio! </span>
+                Selamat, <span class="font-medium"> {{ Auth::user()->full_name }} </span>
             </div>
             <div class="mt-4">
                 Anda berhasil absen <span class="font-bold uppercase">masuk</span>. Semangat!!

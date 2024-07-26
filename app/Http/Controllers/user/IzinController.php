@@ -25,7 +25,8 @@ class IzinController extends Controller
         $izins = Izin::where('user_id', '=', $user)->get();
 
         return view('user_app.izin.index')->with([
-            'izins' => $izins
+            'izins' => $izins,
+            'sidebar_data' => parent::sidebarMenu()
         ]);
     }
     public function store(Request $request)

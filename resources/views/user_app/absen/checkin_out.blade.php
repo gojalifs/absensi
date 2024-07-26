@@ -1,11 +1,11 @@
-@extends('app')
+@extends('index')
 
 @section('map_header')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 @endsection
 
-@section('content')
+@section('main-content')
     <div class="h-screen md:flex md:items-center">
         <div id="map" class="h-screen w-full z-0"></div>
         <div class="p-4 pt-2 m-4 rounded-xl absolute bottom-0 bg-white shadow-lg right-0 left-0 md:static">

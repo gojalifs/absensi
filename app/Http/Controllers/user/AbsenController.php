@@ -18,8 +18,8 @@ class AbsenController extends Controller
     {
         $user = Auth::user();
         $location = Location::get()->first();
-        
-        if ($jenis != 'masuk' && $jenis != 'pulang' ) {
+
+        if ($jenis != 'masuk' && $jenis != 'pulang') {
             return redirect('/');
         }
 
@@ -30,6 +30,7 @@ class AbsenController extends Controller
                     'jenis' => $jenis,
                     'user' => $user,
                     'location' => $location,
+                    'sidebar_data' => parent::sidebarMenu()
                 ]
             )
         );
@@ -82,6 +83,9 @@ class AbsenController extends Controller
         $carbon = Carbon::parse($data->created_at);
         $time = $carbon->translatedFormat('h:i a');
         $data->jam = $time;
-        return view('user_app.absen.sukses', with(['data' => $data]));
+        return view('user_app.absen.sukses', with([
+            'data' => $data,
+            'sidebar_data' => parent::sidebarMenu()
+        ]));
     }
 }

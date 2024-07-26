@@ -74,12 +74,11 @@ class RiwayatController extends Controller
             ->where('users.id', '=', $user)
             ->whereMonth('absensis.created_at', '=', $month)
             ->whereYear('absensis.created_at', '=', $year)
-            ->select(['absensis.jenis', 'absensis.created_at'])
-            ->orderBy('created_at')
+            ->select(['*', 'absensis.jenis', 'absensis.created_at'])
+            ->orderBy('absensis.created_at')
             ->get();
 
         $result = [];
-        Log::debug(json_encode($dates));
 
         foreach ($dates as $date) {
             $data = (object) [
@@ -87,6 +86,9 @@ class RiwayatController extends Controller
                 'kerja' => $date->kerja,
                 'masuk' => '',
                 'pulang' => '',
+                'p_masuk' => '',
+                'p_pulang' => '',
+                'keterangan' => '',
             ];
 
             $any = false;
@@ -101,14 +103,25 @@ class RiwayatController extends Controller
 
                 if ($r->jenis == 'MASUK') {
                     $data->masuk = $clock;
+                    $data->p_masuk = $r->photo_path;
                 } else {
                     $data->pulang = $clock;
+                    $data->p_pulang = $r->photo_path;
+                }
+
+                if ($data->p_masuk != '' && $data->p_pulang != '') {
+                    $data->keterangan = 'Hadir (Dalam Lokasi)';
+                } else if ($data->p_masuk == '') {
+                    $data->keterangan = 'Tidak Absen Masuk';
+                } else if ($data->p_pulang == '') {
+                    $data->keterangan = 'Tidak Absen Pulang';
+                } else if ($r->izin != '') {
+                    $data->keterangan = $r->izin;
                 }
 
                 $any = true;
                 unset($riwayat[$key]);
             }
-
             array_push($result, $data);
             $any = false;
         }
@@ -116,7 +129,8 @@ class RiwayatController extends Controller
         return view('user_app.riwayat.index', with([
             'route' => end($url),
             'history' => array_reverse($result),
-            'bulan' => $bulan
+            'bulan' => $bulan,
+            'sidebar_data' => parent::sidebarMenu()
         ]));
     }
 }
