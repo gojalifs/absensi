@@ -25,6 +25,10 @@ Route::get('/', [HomeController::class, 'index'])->name('main');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('login', [AuthController::class, 'doLogin'])->name('doLogin');
+Route::get('/register', function () {
+    return view('auth.register');
+})->name('register.show');
+Route::post('/register', [AuthController::class, 'register'])->name('doRegister');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
