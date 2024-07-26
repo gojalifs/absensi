@@ -31,9 +31,9 @@ Route::get('/register', function () {
 Route::post('/register', [AuthController::class, 'register'])->name('doRegister');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::middleware(['user'])->group(function () {
+        Route::get('/home', [HomeController::class, 'userHome'])->name('home');
         Route::get('profil', [ProfileController::class, 'index'])->name('profile');
         Route::get('edit-profile', [ProfileController::class, 'update'])->name('update-profile');
         Route::post('edit-profile', [ProfileController::class, 'goUpdate'])->name('go-update-profile');

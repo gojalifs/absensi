@@ -1,127 +1,125 @@
-@extends('app')
+@extends('index')
 
-@section('content')
+@section('main-content')
     <div>
         {{-- APP BAR --}}
-        <div
-            class="h-28 bg-gradient-to-b from-blue-900 to-sky-600 shadow-xl
-        flex justify-between px-8 items-center text-white">
-            <div>
-                <div class="text-2xl">
-                    Halo, {{ $user->name }}
+        <div class="h-72 bg-teal-400 shadow-xl">
+            <div class="relative flex justify-between px-8 text-white">
+                <div class="absolute top-4 left-40 text-xl px-3 py-1 text-black bg-yellow-300">
+                    {{ $user->full_name }}
                 </div>
-                <div class="text-sm" id="time"></div>
+                <a href="{{ route('logout') }}">
+                    <div class="absolute right-5 top-4 bg-gray-300 px-3 py-1 text-black hover:bg-gray-400">
+                        Log out
+                    </div>
+                </a>
             </div>
-            <div>
-                <img src="{{ $user->profile_photo_path ?? 'https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg' }}"
-                    alt="avatar" class="rounded-full w-16 h-16">
-            </div>
-        </div>
-
-        {{-- Riwayat Absensi --}}
-        <div class="flex flex-col h-48 w-80 mt-6 mx-auto rounded-xl border-2 shadow-lg">
-            <div class="flex justify-around bg-sky-300 rounded-t-xl text-white">
-                <div>Masuk</div>
-                <div>Pulang</div>
-            </div>
-
-            <div class="flex grow justify-around items-center text-4xl font-medium text-center">
-                <div class="w-1/2">
-                    @if ($masuk)
-                        <div>{{ $masuk }}</div>
-                    @else
-                        <div>-</div>
-                    @endif
+            <div class="flex flex-col justify-center items-center h-full text-6xl text-center">
+                <div>
+                    Selamat Datang Di Aplikasi
                 </div>
-                <div class="w-1/2">
-                    @if ($pulang)
-                        <div>{{ $pulang }}</div>
-                    @else
-                        <div>-</div>
-                    @endif
+                <div>
+                    Absensi Guru Honorer
                 </div>
             </div>
         </div>
 
-        {{-- Menu Utama --}}
-        <div class="px-4 mt-4 sm:text-3xl sm:mt-8 sm:mb-4">Menu Utama</div>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 text-sm py-6 px-8 sm:max-w-[700px] mx-auto">
-            <div class="group">
-                <a href="absen/masuk" id="checkin">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 mx-auto">
-                        <path fill-rule="evenodd"
-                            d="M16.5 3.75a1.5 1.5 0 0 1 1.5 1.5v13.5a1.5 1.5 0 0 1-1.5 1.5h-6a1.5 1.5 0 0 1-1.5-1.5V15a.75.75 0 0 0-1.5 0v3.75a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V5.25a3 3 0 0 0-3-3h-6a3 3 0 0 0-3 3V9A.75.75 0 1 0 9 9V5.25a1.5 1.5 0 0 1 1.5-1.5h6Zm-5.03 4.72a.75.75 0 0 0 0 1.06l1.72 1.72H2.25a.75.75 0 0 0 0 1.5h10.94l-1.72 1.72a.75.75 0 1 0 1.06 1.06l3-3a.75.75 0 0 0 0-1.06l-3-3a.75.75 0 0 0-1.06 0Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <div class="flex justify-center">
-                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400"
-                            id="checkin_text">
-                            Check in
-                        </div>
-                    </div>
-                </a>
+        {{-- Deksripsi Sekolah --}}
+        <div class="flex flex-col justify-center mt-8">
+            <div class="text-center font-medium text-xl uppercase">
+                SMP N 2 Telukjambe Barat
             </div>
-            <div class="group">
-                <a href="absen/pulang" id="checkout">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-12 mx-auto">
-                        <path fill-rule="evenodd"
-                            d="M7.5 3.75A1.5 1.5 0 0 0 6 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h6a1.5 1.5 0 0 0 1.5-1.5V15a.75.75 0 0 1 1.5 0v3.75a3 3 0 0 1-3 3h-6a3 3 0 0 1-3-3V5.25a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3V9A.75.75 0 0 1 15 9V5.25a1.5 1.5 0 0 0-1.5-1.5h-6Zm10.72 4.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 1 1-1.06-1.06l1.72-1.72H9a.75.75 0 0 1 0-1.5h10.94l-1.72-1.72a.75.75 0 0 1 0-1.06Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <div class="flex justify-center">
-                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400"
-                            id="checkout_text">
-                            Check out
-                        </div>
+            <hr class="w-48 h-1 mx-auto my-4 bg-black border-0 rounded">
+            <div class="grid grid-cols-2 px-8 gap-8">
+                <div>
+                    <div class="font-medium">
+                        Galeri
                     </div>
-                </a>
-            </div>
-            <div class="group">
-                <a href="{{ route('izin.index') }}">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="size-12 mx-auto">
-                        <path
-                            d="M8 13H16M8 13V18C8 19.8856 8 20.8284 8.58579 21.4142C9.17157 22 10.1144 22 12 22C13.8856 22 14.8284 22 15.4142 21.4142C16 20.8284 16 19.8856 16 18V13M8 13C5.2421 12.3871 3.06717 10.2687 2.38197 7.52787L2 6M16 13C17.7107 13 19.1506 14.2804 19.3505 15.9795L20 21.5"
-                            stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" />
-                        <circle cx="12" cy="6" r="4" stroke="#1C274C" stroke-width="1.5" />
-                    </svg>
-                    <div class="flex justify-center">
-                        <div class="font-normal text-center group-hover:border-b-2 group-hover:border-sky-400">
-                            Izin
+                    <div id="default-carousel" class="relative w-full mb-8" data-carousel="slide">
+                        <!-- Carousel wrapper -->
+                        <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                            <!-- Item 1 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/galeri/1.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/galeri/2.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                                <img src="/galeri/3.jpg"
+                                    class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                    alt="...">
+                            </div>
                         </div>
+                        <!-- Slider indicators -->
+                        <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+                                data-carousel-slide-to="0"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+                                data-carousel-slide-to="1"></button>
+                            <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+                                data-carousel-slide-to="2"></button>
+                        </div>
+                        <!-- Slider controls -->
+                        <button type="button"
+                            class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-prev>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M5 1 1 5l4 4" />
+                                </svg>
+                                <span class="sr-only">Previous</span>
+                            </span>
+                        </button>
+                        <button type="button"
+                            class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                            data-carousel-next>
+                            <span
+                                class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 9 4-4-4-4" />
+                                </svg>
+                                <span class="sr-only">Next</span>
+                            </span>
+                        </button>
                     </div>
-                </a>
+                </div>
+                <div>
+                    <div class="font-medium">
+                        Profil Sekolah
+                    </div>
+                    <div>
+                        <div>
+                            SMPN 2 Teluk Jambe Barat merupakan salah satu sekolah menengah pertama yang berada di Karawang,
+                            tepatnya berada di Wanasari, Telukjambe Barat, Karawang, Jawa Barat.
+                        </div>
+                        <div>
+                            Berikut ini adalah identitas lengkap SMPN 2 Telukjambe Barat:
+                        </div>
+                        <ul class="ml-4">
+                            <li><span class="font-medium"> NPSN :</span> 20217861</li>
+                            <li><span class="font-medium"> Status :</span> Negeri</li>
+                            <li><span class="font-medium"> Bentuk Pendidikan :</span> SMP</li>
+                            <li><span class="font-medium"> Status Kepemilikan :</span> Pemerintah Pusat</li>
+                            <li><span class="font-medium"> SK Pendirian Sekolah :</span> 13a//O/198</li>
+                            <li><span class="font-medium"> Tanggal SK Pendirian :</span> 1998-01-29</li>
+                            <li><span class="font-medium"> SK Izin Operasional :</span> 421/Kep.251-Huk/2008</li>
+                            <li><span class="font-medium"> Tanggal SK Izin Operasional :</span> 2008-03-25</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-
-        {{-- Bottom navbar --}}
-        @extends('user_app/bottom_bar')
     </div>
-
-    <script>
-        function showTime() {
-            var WIBTime = moment().format('LTS');
-            document.getElementById('time').innerHTML = WIBTime;
-        }
-
-        const checkIn = document.getElementById("checkin")
-        const checkInTxt = document.getElementById("checkin_text")
-        const checkinStatus = '{{ $masuk }}'
-        const checkOut = document.getElementById("checkout")
-        const checkoutTxt = document.getElementById("checkout_text")
-        const checkoutStatus = '{{ $pulang }}'
-
-        if (checkinStatus != '-') {
-            checkIn.removeAttribute('href');
-            checkIn.classList.add("text-slate-500")
-            checkInTxt.classList.add("group-hover:border-none")
-        }
-
-        if (checkoutStatus != '-') {
-            checkout.removeAttribute('href');
-            checkout.classList.add("text-slate-500")
-            checkoutTxt.classList.add("group-hover:border-none")
-        }
-
-        setInterval(showTime, 1000);
-    </script>
 @endsection

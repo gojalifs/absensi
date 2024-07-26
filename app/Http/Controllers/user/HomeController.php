@@ -16,8 +16,14 @@ class HomeController extends Controller
     {
         if (Auth::user()->role == 'ADMIN') {
             return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('home');
         }
-        $url = URL::current();
+
+    }
+
+    public function userHome()
+    {
         $user = Auth::user();
 
         $masuk = "SELECT a.created_at FROM absensis a
@@ -49,7 +55,8 @@ class HomeController extends Controller
             'route' => '/',
             'user' => $user,
             'masuk' => $timeMasuk ?? '-',
-            'pulang' => $timePulang ?? '-'
+            'pulang' => $timePulang ?? '-',
+            'sidebar_data' => parent::sidebarMenu()
         ]));
     }
 }
