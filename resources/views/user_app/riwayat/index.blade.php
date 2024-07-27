@@ -1,5 +1,10 @@
 @extends('index')
 
+@section('map_header')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+@endsection
+
 @section('main-content')
     <div class="bg-green-300">
         <div class="flex pt-4 px-8 justify-between items-center">
@@ -35,8 +40,8 @@
                     </form>
                 </div>
             </div>
-            <div class="mt-4 w-full mx-4">
-                <table class="table-fixed mx-auto border-collapse">
+            <div class="mt-4 w-full px-4">
+                <table class="table-auto w-full border-collapse">
                     <thead>
                         <th class="border">Foto dan Lokasi</th>
                         <th class="border">Tanggal</th>
@@ -48,12 +53,42 @@
                         @foreach ($history as $h)
                             <tr>
                                 <td class="border px-4">
-                                    <div class="flex text-center space-x-2">
-                                        @if ($h->p_masuk)
+                                    <div class="grid grid-cols-2 text-center gap-2">
+                                        @if ($h->p_masuk != '')
                                             <img src="{{ $h->p_masuk }}" alt="" class="h-32 w-32 object-cover">
-                                            <img src="{{ $h->p_pulang }}" alt="" class="h-32 w-32 object-cover">
+                                        @else
+                                            @if ($h->kerja != 'kerja')
+                                                <div
+                                                    class="flex w-32 h-32 text-lg font-medium bg-red-400 justify-center items-center">
+                                                    Tidak absen Masuk
+                                                </div>
+                                            @else
+                                                <div class="flex w-32 h-32 text-lg font-medium justify-center items-center">
+                                                    {{ $h->kerja }}
+                                                </div>
+                                            @endif
                                         @endif
-                                        <div id="map" class="w-32 h-32"></div>
+                                        @if ($h->p_pulang != '')
+                                            <img src="{{ $h->p_pulang }}" alt="" class="h-32 w-32 object-cover">
+                                        @else
+                                            @if ($h->kerja != 'libur')
+                                                <div
+                                                    class="flex w-32 h-32 text-lg font-medium bg-red-400 justify-center items-center">
+                                                    Tidak absen Pulang
+                                                </div>
+                                            @else
+                                                <div class="flex w-32 h-32 text-lg font-medium justify-center items-center">
+                                                    {{ $h->kerja }}
+                                                </div>
+                                            @endif
+                                        @endif
+                                        @if (isset($h->lat_m))
+                                            <div id="map{{ $h->map_id }}m" class="w-32 h-32 bg-blue-400"></div>
+                                        @endif
+                                        @if (isset($h->lat_p))
+                                            <div id="map{{ $h->map_id }}p" class="w-32 h-32 bg-yellow-400"></div>
+                                        @endif
+
                                     </div>
                                 </td>
                                 <td class="border text-center px-4">{{ $h->date }} </td>
@@ -67,6 +102,32 @@
                                     @endif
                                 </td>
                             </tr>
+
+                            @if (isset($h->lat_m))
+                                <script>
+                                    // const mapId = "map{{ $h->map_id }}";
+                                    console.log("map{{ $h->map_id }}");
+                                    $(document).ready(function() {
+                                        var latitude = "{{ $h->lat_m }}";
+                                        var longitude = "{{ $h->lng_m }}";
+                                        var map = L.map('map{{ $h->map_id }}m').setView([latitude, longitude], 14);
+                                        var marker = new L.marker([latitude, longitude]).addTo(map);
+                                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                            attribution: '© OpenStreetMap contributors'
+                                        }).addTo(map);
+                                    });
+                                </script>
+                            @endif
+                            @if (isset($h->lat_p))
+                                <script>
+                                    $(document).ready(function() {
+                                        var latitude = "{{ $h->lat_p }}";
+                                        var longitude = "{{ $h->lng_p }}";
+                                        var map = L.map('map{{ $h->map_id }}p').setView([latitude, longitude], 14);
+                                        var marker = new L.marker([latitude, longitude]).addTo(map);
+                                    });
+                                </script>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

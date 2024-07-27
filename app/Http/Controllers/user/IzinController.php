@@ -8,6 +8,7 @@ use App\Models\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
 class IzinController extends Controller
@@ -23,9 +24,15 @@ class IzinController extends Controller
     {
         $user = Auth::user()->id;
         $izins = Izin::where('user_id', '=', $user)->get();
+        $izins = array_map(function ($izin) {
+            // Return the file path or URL
+            $filePath = Storage::url($izin['photo_path']);
+            $izin['photo_path'] = $filePath;
+            return (object) $izin;
+        }, $izins->toArray());
 
         return view('user_app.izin.index')->with([
-            'izins' => $izins,
+            'izins' => (object) $izins,
             'sidebar_data' => parent::sidebarMenu()
         ]);
     }
@@ -43,7 +50,7 @@ class IzinController extends Controller
             $filename = "izin_{$user}_{$unique}.$extension";
 
             $path = $file->storeAs(
-                'izin',
+                'public/izin',
                 $filename
             );
 
@@ -53,12 +60,11 @@ class IzinController extends Controller
             $izin->keterangan = $keterangan;
             $izin->photo_path = $path;
             $izin->catatan = $catatan;
-
             $izin->save();
 
-            return redirect()->route('izin_success');
+            return redirect()->route('izin.index', ['success' => "Pengajuan {$keterangan} sukses"]);
         } catch (\Throwable $th) {
-            return redirect()->back()->withErrors(['error' => 'Gagal mengajukan izin']);
+            return redirect()->back()->withErrors(['error' => 'Gagal mengajukan izin. Code: ' . $th->getCode()]);
         }
     }
 

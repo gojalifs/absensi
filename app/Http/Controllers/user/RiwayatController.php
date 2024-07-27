@@ -71,12 +71,13 @@ class RiwayatController extends Controller
 
         $riwayat = DB::table('absensis')
             ->join('users', 'absensis.user_id', '=', 'users.id')
-            ->where('users.id', '=', $user)
+            ->where('absensis.user_id', '=', $user)
             ->whereMonth('absensis.created_at', '=', $month)
             ->whereYear('absensis.created_at', '=', $year)
-            ->select(['*', 'absensis.jenis', 'absensis.created_at'])
+            ->select(['*', 'absensis.jenis', 'absensis.created_at', 'absensis.id as abs_id'])
             ->orderBy('absensis.created_at')
             ->get();
+        // dd($riwayat[1]);
 
         $result = [];
 
@@ -84,6 +85,7 @@ class RiwayatController extends Controller
             $data = (object) [
                 'date' => $date->date,
                 'kerja' => $date->kerja,
+                'map_id' => '',
                 'masuk' => '',
                 'pulang' => '',
                 'p_masuk' => '',
@@ -93,18 +95,28 @@ class RiwayatController extends Controller
 
             $any = false;
             foreach ($riwayat as $key => $r) {
+                // $data->id = $r->abs_id;
                 $d = Carbon::parse($r->created_at)->format('Y-m-d');
-                if ($d != $date->date) {
+                if ($d != $date->date && $key != 0) {
+                    // dd(json_encode($d . "disiini stop if" . $r->abs_id));
                     break;
                 }
 
+                // dd(json_encode($d . "disiini stop di luar if" . $r->abs_id));
                 $data->date = $d;
                 $clock = Carbon::parse($r->created_at)->format('H.i');
 
                 if ($r->jenis == 'MASUK') {
+                    $data->map_id = uniqid(rand());
+                    $data->lat_m = $r->lat;
+                    $data->lng_m = $r->lng;
                     $data->masuk = $clock;
                     $data->p_masuk = $r->photo_path;
+                    // dd($data);
                 } else {
+                    $data->map_id = uniqid(rand());
+                    $data->lat_p = $r->lat;
+                    $data->lng_p = $r->lng;
                     $data->pulang = $clock;
                     $data->p_pulang = $r->photo_path;
                 }
@@ -125,7 +137,7 @@ class RiwayatController extends Controller
             array_push($result, $data);
             $any = false;
         }
-
+        // dd(json_encode(array_reverse($result)));
         return view('user_app.riwayat.index', with([
             'route' => end($url),
             'history' => array_reverse($result),

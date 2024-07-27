@@ -46,17 +46,18 @@ class Controller extends BaseController
                             'current' => 'pulang',
                             'route' => route('checkInOut', 'pulang'),
                         ],
-                        (object) [
-                            'title' => 'Tidak Masuk',
-                            'current' => 'izin',
-                            'route' => route('izin.index'),
-                        ],
                     ],
                 ],
                 (object) [
                     'title' => 'Info Absen',
                     'route' => route('riwayat'),
                     'current' => 'riwayat',
+                    'icon' => '/static/checklist-exploration.png'
+                ],
+                (object) [
+                    'title' => 'Riwayat Izin',
+                    'route' => route('izin.index'),
+                    'current' => 'izin',
                     'icon' => '/static/checklist-exploration.png'
                 ],
 
