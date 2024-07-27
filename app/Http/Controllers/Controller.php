@@ -14,12 +14,36 @@ class Controller extends BaseController
     public function sidebarMenu()
     {
         if (Auth::user()->role == 'ADMIN') {
-            return [
-                [
+            return (object) [
+                (object) [
                     'title' => 'Dashboard',
                     'route' => route('dashboard'),
                     'current' => 'dashboard',
                     'icon' => '/static/dashboard.png'
+                ],
+                (object) [
+                    'title' => 'Rekap Absen',
+                    'route' => route('data-absensi'),
+                    'current' => 'data-absensi',
+                    'icon' => '/static/assessment.png'
+                ],
+                (object) [
+                    'title' => 'Data Guru',
+                    'route' => route('data-guru'),
+                    'current' => 'data-guru',
+                    'icon' => '/static/checklist-exploration.png'
+                ],
+                (object) [
+                    'title' => 'Data Lokasi',
+                    'route' => route('data.lokasi'),
+                    'current' => 'data-lokasi',
+                    'icon' => '/static/map.png'
+                ],
+                (object) [
+                    'title' => 'Data Izin',
+                    'route' => route('data.izin'),
+                    'current' => 'data-izin',
+                    'icon' => '/static/assessment.png'
                 ],
             ];
         } else {

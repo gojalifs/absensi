@@ -32,7 +32,8 @@ class HomeController extends Controller
         return view('admin.dashboard', with([
             'url' => end($url),
             'count' => $count,
-            'absenCount' => $absenCount
+            'absenCount' => $absenCount,
+            'sidebar_data'=> parent::sidebarMenu()
         ]));
     }
 }

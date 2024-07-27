@@ -17,7 +17,8 @@ class DataLokasiController extends Controller
 
         return view('admin.location.index', with([
             'url' => end($url),
-            'location' => $location
+            'location' => $location,
+            'sidebar_data'=> parent::sidebarMenu()
         ]));
     }
 

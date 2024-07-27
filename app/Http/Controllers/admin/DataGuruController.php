@@ -19,7 +19,8 @@ class DataGuruController extends Controller
 
         return view('admin.guru.data-guru', with([
             'url' => end($url),
-            'users' => $users
+            'users' => $users,
+            'sidebar_data' => parent::sidebarMenu()
         ]));
     }
 
@@ -32,7 +33,8 @@ class DataGuruController extends Controller
 
         return view('admin.guru.edit', with([
             'url' => end($url),
-            'user' => $user
+            'user' => $user,
+            'sidebar_data' => parent::sidebarMenu()
         ]));
     }
 
@@ -59,7 +61,10 @@ class DataGuruController extends Controller
         $url = URL::current();
         $url = explode('/', $url);
 
-        return view('admin.guru.edit', with(['url' => end($url)]));
+        return view('admin.guru.edit', with([
+            'url' => end($url),
+            'sidebar_data' => parent::sidebarMenu()
+        ]));
     }
 
     public function storeTambahGuru(Request $request)

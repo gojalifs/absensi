@@ -79,7 +79,8 @@ class DataAbsensiController extends Controller
             'date' => $date,
             'month' => $monthYear,
             'url' => end($url),
-            'absensis' => (object) $result
+            'absensis' => (object) $result,
+            'sidebar_data'=> parent::sidebarMenu()
         ]));
     }
 

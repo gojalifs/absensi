@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('index')
 
 @section('admin-content')
     <script>

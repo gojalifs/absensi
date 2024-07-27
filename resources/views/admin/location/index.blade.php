@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('index')
 
 @section('map_header')
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />

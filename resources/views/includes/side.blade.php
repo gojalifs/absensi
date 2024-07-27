@@ -56,6 +56,16 @@
                     @endif
                 </li>
             @endforeach
+            <hr>
+            <a href="{{ route('logout') }}"
+                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group
+                 hover:bg-red-700 dark:text-white dark:hover:bg-gray-700 bg-red-400"
+                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                <img src="{{ $s->icon }}" alt="" class="w-8">
+                <span class="flex-1 ms-3 text-left text-white">
+                    Logout
+                </span>
+            </a>
         </ul>
     </div>
 </aside>

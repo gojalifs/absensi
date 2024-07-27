@@ -98,6 +98,7 @@ class IzinController extends Controller
             'url' => end($url),
             'izinBelum' => $izin,
             'izinSudah' => $izinSudah,
+            'sidebar_data' => parent::sidebarMenu()
         ]);
     }
 

@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('index')
 
 @section('admin-content')
     <div class="mx-4">
@@ -23,6 +23,7 @@
                     <th class="border p-2">Keterangan</th>
                     <th class="border p-2">Catatan</th>
                     <th class="border p-2">Status</th>
+                    <th class="border p-2">Bukti</th>
                     <th class="border p-2">Aksi</th>
                 </thead>
                 <tbody>
@@ -52,11 +53,15 @@
                                 {{ $absen->status }}
                             </td>
                             <td class="border p-2">
+                                <img src="{{ $absen->photo_path }}" alt="" class="w-32 h-32">
+                            </td>
+                            <td class="border p-2">
                                 @if ($absen->status == 'belum')
                                     <div class="flex space-x-2">
                                         <form action="{{ route('izin.ubah') }}" method="post">
                                             @csrf
-                                            <input type="hidden" name="id" id="id" value="{{ $absen->id }}">
+                                            <input type="hidden" name="id" id="id"
+                                                value="{{ $absen->id }}">
                                             <input type="hidden" name="status" id="status" value="sudah">
                                             <button
                                                 class="bg-sky-400 px-2 py-1 text-white hover:bg-sky-700 rounded-md w-min"
