@@ -30,8 +30,12 @@
                             <li> Tekan tombol di samping untuk menyimpan </li>
                         </ul>
                     </label>
+                    <div class="w-10 h-10 p-1 mr-4 border bg-white shadow-md rounded-md border-slate-400 hover:bg-sky-200 hover:border-sky-400"
+                        id="my-location" onclick="getLocation()">
+                        <img src="static/pin-map.png" alt="my location">
+                    </div>
                     <button
-                        class="mr-4 rounded-md border border-slate-400 p-2 shadow-md hover:bg-sky-200 hover:border-sky-400"
+                        class="w-10 h-10 mr-4 rounded-md border border-slate-400 p-2 shadow-md hover:bg-sky-200 hover:border-sky-400"
                         id="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                             <path fill-rule="evenodd"
@@ -55,6 +59,8 @@
         const currentLat = '{{ $location->lat ?? null }}';
         const currentLng = '{{ $location->lng ?? null }}';
         const currentRad = '{{ $location->radius ?? null }}';
+
+        const myLocationBtn = document.getElementById('my-location');
 
         if (currentLat && currentLng && currentRad) {
             var latitude = currentLat;
@@ -175,6 +181,11 @@
             }).catch((err) => {
 
             });
+        }
+
+        function goToMyLocation() {
+            getLocation();
+
         }
     </script>
 @endsection

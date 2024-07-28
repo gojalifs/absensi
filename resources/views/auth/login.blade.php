@@ -19,6 +19,12 @@
             </div>
         </div>
         <div class="justify-center flex">
+            @if (Session::get('success'))
+                <div class="text-gray-400">{{ Session::get('success') }}</div>
+            @endif
+            @if ($errors->any())
+                <div class="text-red-400">{{ $errors->first() }}</div>
+            @endif
             <form action="{{ route('login') }}" method="POST" class="min-w-[500px] max-w-[600px] p-4 space-y-4">
                 @csrf
                 <div class="text-center text-3xl my-8">
@@ -46,7 +52,8 @@
                         class="border-2 p-2 mt-2 border-slate-200 rounded-md w-full focus:border-2 focus:outline-none focus:border-sky-400 " />
                 </div>
                 <div>
-                    <a href="" class="hover:text-blue-700 hover:underline">Lupa Kata Sandi?</a>
+                    <a href="{{ route('password.reset') }}" class="hover:text-blue-700 hover:underline">Lupa Kata
+                        Sandi?</a>
                 </div>
                 <div class="justify-end flex">
                     <button type="submit"

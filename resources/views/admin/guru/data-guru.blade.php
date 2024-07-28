@@ -50,8 +50,7 @@
                                         {{ $key + 1 }}
                                     </td>
                                     <td class="border p-2">
-                                        <input type="text" name="name" id="name" value="{{ $user->full_name }}"
-                                            disabled>
+                                        {{ $user->full_name }}
                                     </td>
                                     <td class="border p-2">
                                         {{ $user->name }}

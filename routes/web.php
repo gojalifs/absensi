@@ -29,6 +29,12 @@ Route::get('/register', function () {
 })->name('register.show');
 Route::post('/register', [AuthController::class, 'register'])->name('doRegister');
 
+Route::get('/forgot', function () {
+    return view('auth.forgot-password');
+})->name('password.reset');
+
+Route::post('/reset', [AuthController::class, 'reset'])->name('pass-reset');
+
 Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['user'])->group(function () {

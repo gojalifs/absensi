@@ -82,7 +82,13 @@ class Controller extends BaseController
                     'title' => 'Riwayat Izin',
                     'route' => route('izin.index'),
                     'current' => 'izin',
-                    'icon' => '/static/checklist-exploration.png'
+                    'icon' => '/static/clock.png'
+                ],
+                (object) [
+                    'title' => 'Profil',
+                    'route' => route('profile'),
+                    'current' => 'profil',
+                    'icon' => '/static/profile.png'
                 ],
 
             ];

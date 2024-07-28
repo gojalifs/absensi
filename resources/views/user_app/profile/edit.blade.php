@@ -1,7 +1,7 @@
-@extends('app')
+@extends('index')
 
-@section('content')
-    <div>
+@section('main-content')
+    <div class="w-2/3 mx-auto my-4">
         <form action="/edit-profile" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="id" id="id" value="{{ $user->id }}">
@@ -46,8 +46,8 @@
                         <div>
                             <input type="radio" name="gender" id="laki-laki" value="0"
                                 class="border rounded-sm w-full placeholder:text-sm p-2"
-                                checked="{{ $user->jenis_kelamin == 0 ? 'checked' : null }}"
-                                placeholder="Masukkan email guru . . ." required>
+                                placeholder="Masukkan email guru . . ." {{ $user->jenis_kelamin == 0 ? 'checked' : null }}
+                                required>
                         </div>
                         <label for="laki-laki">Laki-laki</label>
                     </div>
@@ -55,8 +55,8 @@
                         <div>
                             <input type="radio" name="gender" id="perempuan" value="1"
                                 class="border rounded-sm w-full placeholder:text-sm p-2"
-                                checked="{{ $user->jenis_kelamin == 1 ? 'checked' : null }}"
-                                placeholder="Masukkan email guru . . ." required>
+                                placeholder="Masukkan email guru . . ." {{ $user->jenis_kelamin == 1 ? 'checked' : null }}
+                                required>
                         </div>
                         <label for="perempuan">Perempuan</label>
                     </div>

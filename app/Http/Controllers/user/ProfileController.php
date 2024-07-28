@@ -20,7 +20,8 @@ class ProfileController extends Controller
 
         return view('user_app.profile.profile', with([
             'route' => end($url),
-            'user' => $user
+            'user' => $user,
+            'sidebar_data' => parent::sidebarMenu()
         ]));
     }
 
@@ -28,7 +29,10 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        return view('user_app.profile.edit', with(['user' => $user]));
+        return view('user_app.profile.edit', with([
+            'user' => $user,
+            'sidebar_data' => parent::sidebarMenu()
+        ]));
     }
 
     public function goUpdate(Request $request)

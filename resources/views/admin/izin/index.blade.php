@@ -37,8 +37,7 @@
                                 {{ $key + 1 }}
                             </td>
                             <td class="border p-2">
-                                <input type="text" name="name" id="name" value="{{ $absen->user->full_name }}"
-                                    disabled>
+                                {{ $absen->user->full_name }}
                             </td>
                             <td class="border p-2">
                                 {{ $absen->tanggal }}

@@ -1,7 +1,7 @@
 @extends('index')
 
 @section('admin-content')
-    <div class="mx-4">
+    <div class="mx-4 my-4">
         <div class="mx-auto max-w-[600px]">
             <form action="{{ isset($user) ? route('update-guru') : route('tambah-guru') }}" method="post">
                 @csrf
@@ -37,7 +37,7 @@
                             <div>
                                 <input type="radio" name="gender" id="laki-laki" value="0"
                                     class="border rounded-sm w-full placeholder:text-sm p-2"
-                                    checked="{{ isset($user) ? ($user->jenis_kelamin == 0 ? 'checked' : null) : null }}"
+                                    {{ isset($user) ? ($user->jenis_kelamin == 0 ? 'checked' : null) : null }}
                                     placeholder="Masukkan email guru . . ." required>
                             </div>
                             <label for="laki-laki">Laki-laki</label>
@@ -46,7 +46,7 @@
                             <div>
                                 <input type="radio" name="gender" id="perempuan" value="1"
                                     class="border rounded-sm w-full placeholder:text-sm p-2"
-                                    checked="{{ isset($user) ? ($user->jenis_kelamin == 1 ? 'checked' : null) : null }}"
+                                    {{ isset($user) ? ($user->jenis_kelamin == 1 ? 'checked' : null) : null }}
                                     placeholder="Masukkan email guru . . ." required>
                             </div>
                             <label for="perempuan">Perempuan</label>

@@ -22,6 +22,15 @@
             Registrasi Akun
         </div>
         <div class="max-w-[600px] mx-auto">
+            @if ($errors->any())
+                <ul>
+                    @foreach ($errors->all() as $e)
+                        <li>
+                            <div class="text-red-400"{{ $e }}></div>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
             <form action="{{ route('doRegister') }}" method="post" class="space-y-4 mt-4">
                 @csrf
                 <div class="w-full flex items-center">
@@ -36,6 +45,28 @@
                 <div class="w-full flex items-center">
                     <span class="w-40">Email</span>
                     <input type="email" name="email" id="email" required class="border w-full py-1 px-2">
+                </div>
+                <div class="w-full flex">
+                    <div class="w-40">Jenis Kelamin</div>
+                    <div>
+                        <div>
+                            <input type="radio" name="gender" id="man" value="0" required
+                                class="border py-1 px-2">
+                            <label for="man" class="w-40">Laki-laki</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="gender" id="woman" value="1" class="border py-1 px-2">
+                            <label for="woman" class="w-40">Perempuan</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full flex items-center">
+                    <span class="w-40">Alamat Lengkap</span>
+                    <textarea name="address" id="address" required rows="3" class="border w-full py-1 px-2"></textarea>
+                </div>
+                <div class="w-full flex items-center">
+                    <span class="w-40">No. HP</span>
+                    <input type="text" name="phone" id="phone" required class="border w-full py-1 px-2">
                 </div>
                 <div class="w-full flex items-center">
                     <span class="w-40">Password</span>
