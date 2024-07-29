@@ -9,10 +9,10 @@
             </div>
         </div>
         <div class="flex justify-end space-x-4">
-            <div>
+            {{-- <div>
                 <a {{ str_contains(URL::current(), 'register') ? '' : 'href=/register' }}
                     class="{{ str_contains(URL::current(), 'register') ? 'text-red-500' : '' }}">DAFTAR</a>
-            </div>
+            </div> --}}
             <div>
                 <a {{ str_contains(URL::current(), 'login') ? '' : 'href=/login' }}
                     class="{{ str_contains(URL::current(), 'login') ? 'text-red-500' : '' }}">LOGIN</a>
