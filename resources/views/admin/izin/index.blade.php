@@ -52,7 +52,7 @@
                                 {{ $absen->status }}
                             </td>
                             <td class="border p-2">
-                                <img src="{{ $absen->photo_path }}" alt="" class="w-32 h-32">
+                                <img src="{{ Storage::url($absen->photo_path) }}" alt="" class="w-32 h-32">
                             </td>
                             <td class="border p-2">
                                 @if ($absen->status == 'belum')

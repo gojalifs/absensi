@@ -35,19 +35,17 @@
                         <div>Jenis Kelamin</div>
                         <div class="flex space-x-2">
                             <div>
-                                <input type="radio" name="gender" id="laki-laki" value="0"
+                                <input type="radio" name="gender" id="laki-laki" value="L"
                                     class="border rounded-sm w-full placeholder:text-sm p-2"
-                                    {{ isset($user) ? ($user->jenis_kelamin == 0 ? 'checked' : null) : null }}
-                                    placeholder="Masukkan email guru . . ." required>
+                                    {{ isset($user) ? ($user->jenis_kelamin == 'L' ? 'checked' : null) : null }} required>
                             </div>
                             <label for="laki-laki">Laki-laki</label>
                         </div>
                         <div class="flex space-x-2">
                             <div>
-                                <input type="radio" name="gender" id="perempuan" value="1"
+                                <input type="radio" name="gender" id="perempuan" value="P"
                                     class="border rounded-sm w-full placeholder:text-sm p-2"
-                                    {{ isset($user) ? ($user->jenis_kelamin == 1 ? 'checked' : null) : null }}
-                                    placeholder="Masukkan email guru . . ." required>
+                                    {{ isset($user) ? ($user->jenis_kelamin == 'P' ? 'checked' : null) : null }} required>
                             </div>
                             <label for="perempuan">Perempuan</label>
                         </div>

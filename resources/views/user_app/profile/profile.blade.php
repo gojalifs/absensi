@@ -35,7 +35,7 @@
         <div class="mt-4 text-slate-500">
             Jenis Kelamin
         </div>
-        <div class="text-lg">{{ $user->jenis_kelamin == 0 ? 'Laki-laki' : 'Perempuan' }}</div>
+        <div class="text-lg">{{ $user->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</div>
         <div class="mt-4 text-slate-500">
             Alamat
         </div>

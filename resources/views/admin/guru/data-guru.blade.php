@@ -59,7 +59,7 @@
                                         {{ $user->email }}
                                     </td>
                                     <td class="border p-2">
-                                        {{ $user->jenis_kelamin == 0 ? 'Laki-laki' : 'Perempuan' }}
+                                        {{ $user->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}
                                     </td>
                                     <td class="border p-2">
                                         {{ $user->alamat }}

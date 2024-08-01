@@ -23,7 +23,9 @@ class IzinController extends Controller
     public function index()
     {
         $user = Auth::user()->id;
-        $izins = Izin::where('user_id', '=', $user)->get();
+        $izins = Izin::where('user_id', '=', $user)
+            ->orderByDesc('created_at')
+            ->get();
         $izins = array_map(function ($izin) {
             // Return the file path or URL
             $filePath = Storage::url($izin['photo_path']);
@@ -91,7 +93,9 @@ class IzinController extends Controller
     {
         $url = URL::current();
         $url = explode('/', $url);
-        $izin = Izin::orderBy('status')->orderBy('created_at', 'desc')->get();
+        $izin = Izin::orderBy('created_at', 'desc')
+            ->orderBy('status')
+            ->get();
         $izinSudah = Izin::where('status', '=', 'sudah')->orWhere('status', '=', 'tolak')->get();
 
         return view('admin.izin.index')->with([
